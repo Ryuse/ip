@@ -1,0 +1,24 @@
+todo
+todo take book
+list
+deadline
+deadline return book
+deadline return book /by tomorrow
+event
+event reading fair
+event reading fair /from monday morning
+event reading fair /from monday morning /to monday evening
+mark 2
+list
+unmark 2
+list
+mark 4
+unmark 4
+delete 4
+delete 3
+list
+delete 1
+list
+delete 1
+list
+bye
