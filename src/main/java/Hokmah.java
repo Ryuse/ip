@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Hokmah {
     static Scanner scanner = new Scanner(System.in);
-
+    static ArrayList<String> messageLog = new ArrayList<>();
     public static void main(String[] args) {
         greet();
         message();
@@ -24,13 +25,34 @@ public class Hokmah {
         System.out.println(message);
     }
 
+    public static void inputHandler(String input){
+        if(input.equals("bye")){
+            exit();
+            System.exit(0);
+        }
+
+        else if(input.equals("list")){
+            showLog();
+        }
+
+        else{
+            messageLog.add(input);
+            System.out.println("added: " + input);
+        }
+    }
+
+    public static void showLog(){
+        for(int i = 0; i < messageLog.size(); i++){
+            System.out.println(i+1 +". " + messageLog.get(i));
+        }
+    }
+
     public static void message(){
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
-            System.out.println(input);
+            inputHandler(input);
             input = scanner.nextLine();
         }
-
     }
 
     public static void exit(){
