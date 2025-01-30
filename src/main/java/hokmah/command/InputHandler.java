@@ -1,3 +1,7 @@
+package hokmah.command;
+
+import hokmah.exception.HokmahException;
+
 public class InputHandler {
 
     private CommandHandler commandHandler;
