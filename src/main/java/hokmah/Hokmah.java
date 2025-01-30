@@ -1,10 +1,15 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+package hokmah;
+
+import hokmah.command.CommandHandler;
+import hokmah.command.InputHandler;
+import hokmah.exception.HokmahException;
+import hokmah.task.TaskList;
+import hokmah.ui.UiHandler;
+
 import java.util.Scanner;
 
 public class Hokmah {
-    static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
+    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
 
     static Scanner scanner = new Scanner(System.in);
     private TaskList tasks;

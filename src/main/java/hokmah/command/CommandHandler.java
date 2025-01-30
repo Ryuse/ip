@@ -1,9 +1,16 @@
+package hokmah.command;
+
+import hokmah.exception.HokmahException;
+import hokmah.SaveHandler;
+import hokmah.task.*;
+import hokmah.ui.UiHandler;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class CommandHandler {
-    static final String DATE_TIME_FORMAT = Hokmah.DATE_TIME_FORMAT;
+    static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
     TaskList tasks;
     SaveHandler storage;
     UiHandler ui;

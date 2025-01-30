@@ -1,3 +1,7 @@
+package hokmah.exception;
+
+import hokmah.Hokmah;
+
 public class HokmahException extends Exception{
     public enum ExceptionType {
         NO_NAME,

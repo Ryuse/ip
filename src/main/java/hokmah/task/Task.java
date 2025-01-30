@@ -1,7 +1,9 @@
+package hokmah.task;
+
 import java.time.LocalDateTime;
 
 public class Task {
-    static final String DATE_STRING_OUTPUT_FORMAT = "MMM d yyyy hh:mm";
+    public static final String DATE_STRING_OUTPUT_FORMAT = "MMM d yyyy hh:mm";
     private boolean isDone = false;
     private final String name;
 

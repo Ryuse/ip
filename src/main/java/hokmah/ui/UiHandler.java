@@ -1,3 +1,5 @@
+package hokmah.ui;
+
 public class UiHandler {
 
     public UiHandler(){

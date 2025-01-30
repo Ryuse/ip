@@ -1,4 +1,4 @@
-# Hokmah User Guide
+# hokmah.Hokmah User Guide
 
 // Update the title above to match the actual product name
 
