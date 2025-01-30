@@ -1,7 +1,14 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Hokmah {
+
+    static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
+
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Task> taskArrayList = new ArrayList<>();
     public static void main(String[] args) {
@@ -64,6 +71,9 @@ public class Hokmah {
             case "help":
                 help();
                 break;
+            case "upcoming":
+                upcomingTasksOn(inputArray);
+                break;
             default:
                 unsupportedCommand();
                 break;
@@ -72,9 +82,10 @@ public class Hokmah {
 
     }
 
+    //region ========================= Commands =========================
     public static void showList(){
         for(int i = 0; i < taskArrayList.size(); i++){
-            System.out.println(i+1 + "." + taskArrayList.get(i).toString());
+            if(taskArrayList.get(i) != null) System.out.println(i+1 + "." + taskArrayList.get(i).toString());
         }
     }
 
@@ -84,6 +95,7 @@ public class Hokmah {
         }
         return taskArrayList.get(id - 1);
     }
+
     public static void markTask(int id) throws HokmahException {
         Task task = getTask(id);
         task.markDone();
@@ -125,12 +137,27 @@ public class Hokmah {
             throw new HokmahException(HokmahException.ExceptionType.DEADLINE_NO_TIME_END);
         }
 
-        String taskName = taskDetails[0].trim();
-        String deadline = taskDetails[1].trim();
-        Deadline newDeadline = new Deadline(taskName, deadline);
-        taskArrayList.add(newDeadline);
-        System.out.println("Got it. I've added this task:\n" + newDeadline.toString());
-        System.out.println("Now you have " + taskArrayList.size() + " tasks in the list.");
+
+
+        try{
+            String taskName = taskDetails[0].trim();
+            String deadline = taskDetails[1].trim();
+
+            LocalDateTime deadlineDate = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+            Deadline newDeadline = new Deadline(taskName, deadlineDate);
+            taskArrayList.add(newDeadline);
+            System.out.println("Got it. I've added this task:\n" + newDeadline.toString());
+            System.out.println("Now you have " + taskArrayList.size() + " tasks in the list.");
+
+
+        }catch(DateTimeParseException e){
+            throw new HokmahException(HokmahException.ExceptionType.DEADLINE_NO_TIME_END);
+        }
+
+
+
+
+
     }
 
     public static void addEvent(String[] inputArray) throws HokmahException {
@@ -139,7 +166,7 @@ public class Hokmah {
         }
 
         String[] taskDetails = inputArray[1].split("/from");
-        if(taskDetails.length == 1){
+        if(taskDetails.length == 1 ){
             throw new HokmahException(HokmahException.ExceptionType.EVENT_NO_TIME_START);
         }
 
@@ -148,13 +175,23 @@ public class Hokmah {
         if(eventTimeDetails.length == 1){
             throw new HokmahException(HokmahException.ExceptionType.EVENT_NO_TIME_END);
         }
-        String eventStartTime = eventTimeDetails[0].trim();
-        String eventEndTime = eventTimeDetails[1].trim();
 
-        Event newEvent = new Event(taskName, eventStartTime, eventEndTime);
-        taskArrayList.add(newEvent);
-        System.out.println("Got it. I've added this task:\n" + newEvent.toString());
-        System.out.println("Now you have " + taskArrayList.size() + " tasks in the list.");
+        try {
+            String eventStartTime = eventTimeDetails[0].trim();
+            LocalDateTime eventStartTimeDate = LocalDateTime.parse(eventStartTime, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+
+            String eventEndTime = eventTimeDetails[1].trim();
+            LocalDateTime eventEndTimeDate = LocalDateTime.parse(eventEndTime, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+
+            Event newEvent = new Event(taskName, eventStartTimeDate, eventEndTimeDate);
+
+            taskArrayList.add(newEvent);
+            System.out.println("Got it. I've added this task:\n" + newEvent);
+            System.out.println("Now you have " + taskArrayList.size() + " tasks in the list.");
+
+        } catch(DateTimeParseException e) {
+            throw new HokmahException(HokmahException.ExceptionType.EVENT_NO_TIME_START);
+        }
     }
 
     public static void unsupportedCommand(){
@@ -169,14 +206,52 @@ public class Hokmah {
         System.out.println("Here is what I can do:");
         String taskList = "list\n\t(Shows all the tasks in the list)\n" +
                 "todo [name]\n\t(Adds a todo task to the task list)\n" +
-                "deadline [name] /by [time]\n\t(Adds a deadline task to the task list)\n" +
-                "event [name] /from [start time] /to [end time]\n\t(Adds a event task to the task list)\n" +
+                "deadline [name] /by [yyyy-MM-dd]\n\t(Adds a deadline task to the task list)\n" +
+                "event [name] /from [yyyy-MM-dd] /to [yyyy-MM-dd]\n\t(Adds a event task to the task list)\n" +
                 "mark [task number]\n\t (Marks the task at [task number] in the task list as completed)" +
                 "unmark [task number]\n\t (Marks the task at [task number] in the task list as incomplete)" +
                 "delete [task number]\n\t (Deletes the task at [task number] in the task list)" +
                 "bye\n\t(Only if you want to leave. It's not like I wanted you to be here.)";
         System.out.println(taskList);
     }
+
+    public static void upcomingTasksOn(String[] inputArray) throws HokmahException{
+        if(inputArray.length == 1){
+            throw new HokmahException(HokmahException.ExceptionType.NO_UPCOMING_ON_DATE);
+        }
+
+        try{
+            String[] taskDetails = inputArray[1].split("/on");
+
+            String date = taskDetails[1].trim();
+            LocalDateTime dateToCheck = LocalDateTime.parse(date, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+
+
+            int upcomingTasks = 0;
+            System.out.println("Upcoming tasks on " + dateToCheck.format(DateTimeFormatter.ofPattern(Task.DATE_STRING_OUTPUT_FORMAT)) + ":");
+            for (Task task : taskArrayList) {
+                if (task.getTimeEnd().equals(dateToCheck)) {
+                    System.out.println(task);
+                    upcomingTasks += 1;
+                }
+            }
+
+            if (upcomingTasks == 0){
+                System.out.println("You have no upcoming tasks");
+            }
+            else{
+                System.out.println("You have " + upcomingTasks + " upcoming tasks");
+            }
+        }
+        catch(DateTimeParseException e){
+            throw new HokmahException(HokmahException.ExceptionType.NO_UPCOMING_ON_DATE);
+        }
+
+
+
+
+    }
+    //endregion ========================= Commands =========================
 
     public static void messageHandler(){
 

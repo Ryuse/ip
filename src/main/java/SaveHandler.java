@@ -1,6 +1,10 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +20,7 @@ public class SaveHandler {
             FileWriter writer = new FileWriter(file);
 
             for (Task task : tasks) {
-                writer.write(task.getSaveText() + "\n");
+                if(task != null) writer.write(task.getSaveText() + "\n");
             }
 
             writer.close();
@@ -44,10 +48,25 @@ public class SaveHandler {
                         task = new ToDo(taskInfo[2]);
                         break;
                     case "D":
-                        task = new Deadline(taskInfo[2], taskInfo[3]);
+                        try{
+                            LocalDateTime DeadlineEndTime = LocalDateTime.parse(taskInfo[3], DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+                            task = new Deadline(taskInfo[2], DeadlineEndTime);
+
+                        }
+                        catch (DateTimeParseException e){
+                            System.out.println(taskInfo[2] + " is not a valid date time format");
+                        }
+
                         break;
                     case "E":
-                        task = new Event(taskInfo[2], taskInfo[3], taskInfo[4]);
+                        try{
+                            LocalDateTime EventStartTime = LocalDateTime.parse(taskInfo[3], DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+                            LocalDateTime eventEndTime = LocalDateTime.parse(taskInfo[4], DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+                            task = new Event(taskInfo[2], EventStartTime, eventEndTime);
+                        }
+                        catch (DateTimeParseException e){
+                            System.out.println(taskInfo[2] + " is not a valid date time format");
+                        }
                         break;
                 }
 
@@ -55,7 +74,6 @@ public class SaveHandler {
                     task.markDone();
                 }
                 tasks.add(task);
-                System.out.println(task.toString());
             }
             scanner.close();
         }

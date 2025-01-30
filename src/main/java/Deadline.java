@@ -1,11 +1,14 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task  {
-    String timeEnd;
-    public Deadline(String name, String timeEnd) {
+    LocalDateTime timeEnd;
+    public Deadline(String name, LocalDateTime timeEnd) {
         super(name);
         this.timeEnd = timeEnd;
     }
 
-    public String getTimeEnd() {
+    public LocalDateTime getTimeEnd() {
         return timeEnd;
     }
 
@@ -14,7 +17,7 @@ public class Deadline extends Task  {
     }
 
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + timeEnd + ")";
+        return "[D]" + super.toString() + " (by: " + timeEnd.format(DateTimeFormatter.ofPattern(DATE_STRING_OUTPUT_FORMAT)) + ")";
     }
 
     public String getSaveText() {

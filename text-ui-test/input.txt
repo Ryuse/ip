@@ -4,10 +4,12 @@ list
 deadline
 deadline return book
 deadline return book /by tomorrow
+deadline return book /by 2019-12-01
+deadline return book /by 2019-12-01 1800
 event
 event reading fair
-event reading fair /from monday morning
-event reading fair /from monday morning /to monday evening
+event reading fair /from 2019-12-02
+event reading fair /from 2019-12-02 1800 /to 2019-12-03 1800
 mark 2
 list
 unmark 2

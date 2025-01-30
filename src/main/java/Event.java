@@ -1,18 +1,21 @@
-public class Event extends Task  {
-    String timeStart;
-    String timeEnd;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String name, String timeStart, String timeEnd) {
+public class Event extends Task  {
+    LocalDateTime timeStart;
+    LocalDateTime timeEnd;
+
+    public Event(String name, LocalDateTime timeStart, LocalDateTime timeEnd) {
         super(name);
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
     }
 
-    public String getTimeStart() {
+    public LocalDateTime getTimeStart() {
         return timeStart;
     }
 
-    public String getTimeEnd() {
+    public LocalDateTime getTimeEnd() {
         return timeEnd;
     }
 
@@ -21,7 +24,9 @@ public class Event extends Task  {
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + timeStart + " to: " + timeEnd + ")";
+        return "[E]" + super.toString() +
+                " (from: " + timeStart.format(DateTimeFormatter.ofPattern(DATE_STRING_OUTPUT_FORMAT)) +
+                " to: " + timeEnd.format(DateTimeFormatter.ofPattern(DATE_STRING_OUTPUT_FORMAT)) + ")";
     }
 
     public String getSaveText() {
