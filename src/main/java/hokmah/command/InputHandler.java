@@ -27,12 +27,16 @@ public class InputHandler {
     public void process(String input) throws HokmahException {
         String[] inputArray = input.split(" ", 2);
         String command = inputArray[0];
+
         switch (command) {
         case "bye":
             commandHandler.exit();
             break;
         case "list":
             commandHandler.showList();
+            break;
+        case "find":
+            commandHandler.findCommand(inputArray);
             break;
         case "mark":
             int mark_id = Integer.parseInt(inputArray[1]);

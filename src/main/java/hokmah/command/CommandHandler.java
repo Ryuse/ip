@@ -8,6 +8,8 @@ import hokmah.ui.UiHandler;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Executes concrete operations based on parsed commands.
@@ -196,6 +198,38 @@ public class CommandHandler {
     }
 
     /**
+     * Finds tasks containing the specified keyword in their description
+     * @param inputArray The parsed command input
+     */
+    public void findCommand(String[] inputArray) throws HokmahException {
+        if (inputArray.length == 1) {
+            throw new HokmahException(HokmahException.ExceptionType.NO_NAME);
+        }
+
+        String keyword = inputArray[1];
+        ArrayList<Task> matches = new ArrayList<>();
+
+        for (Task task : tasks.getTaskArrayList()) {
+            if(task == null){
+                continue;
+            }
+
+            if (task.getName().contains(keyword)) {
+                matches.add(task);
+            }
+        }
+
+        if (matches.isEmpty()) {
+            System.out.println("No tasks found containing: " + keyword);
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < matches.size(); i++) {
+                System.out.println((i + 1) + "." + matches.get(i));
+            }
+        }
+    }
+
+    /**
      * Displays help information with available commands and formats.
      */
     public void help() {
@@ -208,6 +242,7 @@ public class CommandHandler {
                 "unmark [task number]\n\t (Marks the task at [task number] in the task list as incomplete)\n" +
                 "delete [task number]\n\t (Deletes the task at [task number] in the task list)\n" +
                 "upcoming /on [" + DATE_TIME_FORMAT + "]\n\t (Shows all the tasks that are happening on the given date)\n" +
+                "find [keyword]\n\t (Finds tasks containing the specified keyword)\n" +
                 "bye\n\t(Only if you want to leave. It's not like I wanted you to be here.)";
         System.out.println(taskList);
     }

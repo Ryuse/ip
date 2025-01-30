@@ -1,5 +1,6 @@
 package hokmah.ui;
 
+
 /**
  * Manages user interface interactions and formatted output.
  * Handles display of messages, lists, and decorative elements.
@@ -41,4 +42,6 @@ public class UiHandler {
         String message = "Goodbye! I hope you come back soon! ヾ(＾ ∇ ＾).";
         System.out.println(message);
     }
+
+
 }
