@@ -2,7 +2,10 @@ package hokmah.task;
 
 import java.time.LocalDateTime;
 
-
+/**
+ * Abstract base class representing a task.
+ * Defines common properties and behaviors for all task types.
+ */
 public class Task {
     public static final String DATE_STRING_OUTPUT_FORMAT = "MMM d yyyy hh:mm";
     private boolean isDone = false;

@@ -2,6 +2,10 @@ package hokmah.exception;
 
 import hokmah.Hokmah;
 
+/**
+ * Custom exception class for task management errors.
+ * Encapsulates specific error types and formatted messages.
+ */
 public class HokmahException extends Exception{
     /**
      * Enumeration of possible exception types.

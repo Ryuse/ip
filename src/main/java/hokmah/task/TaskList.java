@@ -2,7 +2,10 @@ package hokmah.task;
 
 import java.util.ArrayList;
 
-
+/**
+ * Manages collection of tasks and provides list operations.
+ * Serves as repository for task storage and manipulation.
+ */
 public class TaskList {
     private ArrayList<Task> taskArrayList;
 

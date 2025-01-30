@@ -8,6 +8,10 @@ import hokmah.ui.UiHandler;
 
 import java.util.Scanner;
 
+/**
+ * Main application class for the task management system.
+ * Initializes core components and manages the program lifecycle.
+ */
 public class Hokmah {
     public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
 

@@ -5,6 +5,10 @@ import hokmah.Hokmah;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Concrete task type with deadline constraint.
+ * Represents tasks requiring completion by specific date/time.
+ */
 public class Deadline extends Task  {
     LocalDateTime timeEnd;
 

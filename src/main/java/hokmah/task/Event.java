@@ -5,6 +5,10 @@ import hokmah.Hokmah;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Concrete task type with time-bound duration.
+ * Represents activities occurring between specific start/end times.
+ */
 public class Event extends Task  {
     LocalDateTime timeStart;
     LocalDateTime timeEnd;

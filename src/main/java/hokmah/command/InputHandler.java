@@ -2,6 +2,10 @@ package hokmah.command;
 
 import hokmah.exception.HokmahException;
 
+/**
+ * Parses and routes user input to appropriate command processors.
+ * Acts as bridge between raw input and command execution.
+ */
 public class InputHandler {
 
     private CommandHandler commandHandler;

@@ -1,5 +1,9 @@
 package hokmah.task;
 
+/**
+ * Concrete task type without time constraints.
+ * Represents simple actionable items requiring completion.
+ */
 public class ToDo extends Task  {
     /**
      * Constructs a Todo task.

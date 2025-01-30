@@ -9,6 +9,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Executes concrete operations based on parsed commands.
+ * Contains business logic for task manipulation and system operations.
+ */
 public class CommandHandler {
     static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
     TaskList tasks;

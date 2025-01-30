@@ -1,5 +1,9 @@
 package hokmah.ui;
 
+/**
+ * Manages user interface interactions and formatted output.
+ * Handles display of messages, lists, and decorative elements.
+ */
 public class UiHandler {
 
     public UiHandler(){

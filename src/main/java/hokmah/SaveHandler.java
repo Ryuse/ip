@@ -14,6 +14,10 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles persistent storage operations for tasks.
+ * Manages loading/saving tasks to/from files in pipe-separated format.
+ */
 public class SaveHandler {
 
     private String filePath;
