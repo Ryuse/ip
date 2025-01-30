@@ -20,6 +20,9 @@ public class InputHandler {
             case "list":
                 commandHandler.showList();
                 break;
+            case "find":
+                commandHandler.findCommand(inputArray);
+                break;
             case "mark":
                 int mark_id = Integer.parseInt(inputArray[1]);
                 commandHandler.markTask(mark_id);

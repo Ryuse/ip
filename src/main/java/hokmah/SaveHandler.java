@@ -92,6 +92,7 @@ public class SaveHandler {
                 if(taskInfo[1].equals("1")){
                     task.markDone();
                 }
+
                 tasks.add(task);
             }
             scanner.close();

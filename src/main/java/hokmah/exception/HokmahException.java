@@ -9,7 +9,8 @@ public class HokmahException extends Exception{
         EVENT_NO_TIME_START,
         EVENT_NO_TIME_END,
         TASK_NOT_FOUND,
-        NO_UPCOMING_ON_DATE
+        NO_UPCOMING_ON_DATE,
+        SEARCH_FAILED
 
     }
     static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
@@ -36,6 +37,9 @@ public class HokmahException extends Exception{
 
         else if(type == ExceptionType.NO_UPCOMING_ON_DATE){
             message = "I don't know when you want to see the upcoming tasks. Try again by adding /on " + Hokmah.DATE_TIME_FORMAT;
+        }
+        else if(type == ExceptionType.SEARCH_FAILED) {
+            message = "Can you specify a search term? Something like this: find [keyword]";
         }
         else {
             message = "Something went wrong.. This should not happen!";
