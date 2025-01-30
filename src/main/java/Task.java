@@ -1,12 +1,9 @@
 public class Task {
     private boolean isDone = false;
-//    private static int lastId = 0;
-//    private final int id;
     private final String name;
 
     public Task(String name) {
         this.name = name;
-//        this.id = ++Task.lastId;
     }
 
     public void markDone() {
@@ -17,7 +14,11 @@ public class Task {
         isDone = false;
     }
 
-    public boolean getDone() {
+    public String getType(){
+        return this.getClass().getName();
+    }
+
+    public boolean isDone() {
         return isDone;
     }
 
@@ -25,9 +26,13 @@ public class Task {
         return name;
     }
 
-//    public int getId() {
-//        return id;
-//    }
+    public String getTimeStart() {
+        return null;
+    }
+
+    public String getTimeEnd() {
+        return null;
+    }
 
     public String toString() {
         String output = "";
@@ -40,4 +45,20 @@ public class Task {
         output += name;
         return output;
     }
+
+    public String getSaveText() {
+        String output = "";
+        output += getType() + "|";
+        if (isDone) {
+            output += "1";
+        }
+        else{
+            output += "0";
+        }
+        output += "|" + name;
+
+        return output;
+    }
+
+
 }
