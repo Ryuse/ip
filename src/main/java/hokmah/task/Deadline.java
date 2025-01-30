@@ -1,5 +1,7 @@
 package hokmah.task;
 
+import hokmah.Hokmah;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -23,6 +25,8 @@ public class Deadline extends Task  {
     }
 
     public String getSaveText() {
-        return super.getSaveText() +  "|" + timeEnd;
+        return super.getSaveText() +
+                "|" +
+                timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT)) ;
     }
 }

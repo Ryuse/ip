@@ -62,7 +62,7 @@ public class Task {
         }
         output += "|" + name;
 
-        return output;
+        return output.trim();
     }
 
 
