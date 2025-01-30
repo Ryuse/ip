@@ -5,6 +5,7 @@ import hokmah.Hokmah;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 /**
  * Concrete task type with deadline constraint.
  * Represents tasks requiring completion by specific date/time.
@@ -30,6 +31,7 @@ public class Deadline extends Task  {
         return timeEnd;
     }
 
+
     /**
      * Returns task type identifier.
      * @return "D" for Deadline tasks
@@ -53,6 +55,6 @@ public class Deadline extends Task  {
     public String getSaveText() {
         return super.getSaveText() +
                 "|" +
-                timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT)) ;
+                timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
     }
 }

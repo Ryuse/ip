@@ -38,6 +38,7 @@ public class Hokmah {
         ui.showWelcomeMessage();
     }
 
+
     /**
      * Starts main application loop.
      */
@@ -50,12 +51,12 @@ public class Hokmah {
      */
     public void messageHandler(){
         while(true) {
+
             String input = scanner.nextLine();
             ui.showLine();
-            try{
+            try {
                 inputHandler.process(input);
-            }
-            catch(HokmahException e){
+            } catch (HokmahException e) {
                 System.out.println(e.getMessage());
             }
             ui.showLine();

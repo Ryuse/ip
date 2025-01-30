@@ -16,6 +16,7 @@ public class TaskList {
         taskArrayList = new ArrayList<>();
     }
 
+
     /**
      * Gets the underlying task collection.
      * @return ArrayList containing tasks
@@ -62,7 +63,7 @@ public class TaskList {
      */
     public void printTasks() {
         for (Task task : taskArrayList) {
-            if(task != null) System.out.println(task);
+            if (task != null) System.out.println(task);
         }
     }
 }

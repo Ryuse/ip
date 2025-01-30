@@ -1,5 +1,6 @@
 package hokmah.task;
 
+
 /**
  * Concrete task type without time constraints.
  * Represents simple actionable items requiring completion.
@@ -12,6 +13,7 @@ public class ToDo extends Task  {
     public ToDo(String name) {
         super(name);
     }
+
 
     /**
      * Returns task type identifier.

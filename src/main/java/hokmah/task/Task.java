@@ -33,6 +33,7 @@ public class Task {
         isDone = false;
     }
 
+
     /**
      * Returns the task type identifier.
      * @return String representing task type (to be overridden by subclasses)
@@ -81,8 +82,7 @@ public class Task {
         String output = "";
         if (isDone) {
             output += "[X] ";
-        }
-        else{
+        } else {
             output += "[ ] ";
         }
         output += name;
@@ -98,8 +98,7 @@ public class Task {
         output += getType() + "|";
         if (isDone) {
             output += "1";
-        }
-        else{
+        } else {
             output += "0";
         }
         output += "|" + name;

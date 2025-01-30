@@ -44,15 +44,15 @@ public class SaveHandler {
             FileWriter writer = new FileWriter(file);
 
             for (Task task : tasks) {
-                if(task != null) writer.write(task.getSaveText() + "\n");
+                if (task != null) writer.write(task.getSaveText() + "\n");
             }
 
             writer.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     /**
      * Saves tasks to default file path.
@@ -73,51 +73,52 @@ public class SaveHandler {
 
         try {
             file.getParentFile().mkdirs();
-
             file.createNewFile();
+
             Scanner scanner = new Scanner(file);
             scanner.useDelimiter("\n");
+
             while (scanner.hasNext()) {
                 String[] taskInfo = scanner.next().split("\\|");
                 String taskType = taskInfo[0];
                 String taskName = taskInfo[2];
+
                 Task task = null;
-                switch (taskType){
-                    case "T":
-                        task = new ToDo(taskName);
-                        break;
-                    case "D":
-                        try{
-                            System.out.println(taskInfo[3]);
-                            LocalDateTime DeadlineEndTime = LocalDateTime.parse(taskInfo[3], DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
-                            task = new Deadline(taskName, DeadlineEndTime);
 
-                        }
-                        catch (DateTimeParseException e){
-                            System.out.println(taskName+ " is not a valid date time format");
-                        }
+                switch (taskType) {
+                case "T":
+                    task = new ToDo(taskName);
+                    break;
+                case "D":
+                    try {
+                        System.out.println(taskInfo[3]);
+                        LocalDateTime DeadlineEndTime = LocalDateTime.parse(taskInfo[3], DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+                        task = new Deadline(taskName, DeadlineEndTime);
 
-                        break;
-                    case "E":
-                        try{
-                            LocalDateTime EventStartTime = LocalDateTime.parse(taskInfo[3], DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
-                            LocalDateTime eventEndTime = LocalDateTime.parse(taskInfo[4], DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
-                            task = new Event(taskName, EventStartTime, eventEndTime);
-                        }
-                        catch (DateTimeParseException e){
-                            System.out.println(taskName + " is not a valid date time format");
-                        }
-                        break;
+                    } catch (DateTimeParseException e) {
+                        System.out.println(taskName + " is not a valid date time format");
+                    }
+
+                    break;
+                case "E":
+                    try {
+                        LocalDateTime EventStartTime = LocalDateTime.parse(taskInfo[3], DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+                        LocalDateTime eventEndTime = LocalDateTime.parse(taskInfo[4], DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+                        task = new Event(taskName, EventStartTime, eventEndTime);
+                    } catch (DateTimeParseException e) {
+                        System.out.println(taskName + " is not a valid date time format");
+                    }
+                    break;
                 }
 
-                if(taskInfo[1].equals("1")){
+                if (taskInfo[1].equals("1")) {
                     task.markDone();
                 }
+
                 tasks.add(task);
             }
             scanner.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return tasks;

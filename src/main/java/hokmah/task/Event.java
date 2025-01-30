@@ -5,6 +5,7 @@ import hokmah.Hokmah;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 /**
  * Concrete task type with time-bound duration.
  * Represents activities occurring between specific start/end times.
@@ -41,6 +42,7 @@ public class Event extends Task  {
         return timeEnd;
     }
 
+
     /**
      * Returns task type identifier.
      * @return "E" for Event tasks
@@ -64,7 +66,7 @@ public class Event extends Task  {
      * @return Pipe-separated values including event times
      */
     public String getSaveText() {
-        return super.getSaveText() +  "|"
+        return super.getSaveText() + "|"
                 + timeStart.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT))
                 + "|"
                 + timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
