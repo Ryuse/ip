@@ -24,18 +24,20 @@ public class SaveHandler {
 
     /**
      * Initializes storage handler with file path.
+     *
      * @param filePath Storage file location
      */
-    public SaveHandler(String filePath){
+    public SaveHandler(String filePath) {
         this.filePath = filePath;
     }
 
     /**
      * Saves tasks to specified file path.
+     *
      * @param tasks List of tasks to save
-     * @param path Custom save location
+     * @param path  Custom save location
      */
-    public void saveToFile(ArrayList<Task> tasks, String path){
+    public void saveToFile(ArrayList<Task> tasks, String path) {
         File file = new File(path);
         try {
             file.getParentFile().mkdirs();
@@ -56,18 +58,20 @@ public class SaveHandler {
 
     /**
      * Saves tasks to default file path.
+     *
      * @param tasks List of tasks to save
      */
-    public void saveToFile(ArrayList<Task> tasks){
+    public void saveToFile(ArrayList<Task> tasks) {
         saveToFile(tasks, filePath);
     }
 
     /**
      * Loads tasks from specified file path.
+     *
      * @param path Custom load location
      * @return List of loaded tasks
      */
-    public ArrayList<Task> loadFromFile(String path){
+    public ArrayList<Task> loadFromFile(String path) {
         ArrayList<Task> tasks = new ArrayList<Task>();
         File file = new File(path);
 
@@ -126,6 +130,7 @@ public class SaveHandler {
 
     /**
      * Loads tasks from default file path.
+     *
      * @return List of loaded tasks
      */
     public ArrayList<Task> loadFromFile() {

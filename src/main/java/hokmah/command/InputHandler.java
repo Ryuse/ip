@@ -13,14 +13,16 @@ public class InputHandler {
 
     /**
      * Initializes with command handler dependency.
+     *
      * @param commandHandler Command processor instance
      */
-    public InputHandler(CommandHandler commandHandler){
+    public InputHandler(CommandHandler commandHandler) {
         this.commandHandler = commandHandler;
     }
 
     /**
      * Processes and executes user input commands.
+     *
      * @param input Raw user input string
      * @throws HokmahException For invalid commands or parameters
      */

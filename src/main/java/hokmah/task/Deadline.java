@@ -10,12 +10,13 @@ import java.time.format.DateTimeFormatter;
  * Concrete task type with deadline constraint.
  * Represents tasks requiring completion by specific date/time.
  */
-public class Deadline extends Task  {
+public class Deadline extends Task {
     LocalDateTime timeEnd;
 
     /**
      * Constructs a Deadline task.
-     * @param name Task description
+     *
+     * @param name    Task description
      * @param timeEnd Deadline date/time
      */
     public Deadline(String name, LocalDateTime timeEnd) {
@@ -25,6 +26,7 @@ public class Deadline extends Task  {
 
     /**
      * Gets the deadline date/time.
+     *
      * @return LocalDateTime of deadline
      */
     public LocalDateTime getTimeEnd() {
@@ -34,14 +36,16 @@ public class Deadline extends Task  {
 
     /**
      * Returns task type identifier.
+     *
      * @return "D" for Deadline tasks
      */
-    public String getType(){
+    public String getType() {
         return "D";
     }
 
     /**
      * Returns formatted string representation.
+     *
      * @return String with task details and formatted deadline
      */
     public String toString() {
@@ -50,6 +54,7 @@ public class Deadline extends Task  {
 
     /**
      * Generates save-friendly text representation.
+     *
      * @return Pipe-separated values including deadline time
      */
     public String getSaveText() {

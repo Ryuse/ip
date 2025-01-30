@@ -7,21 +7,21 @@ package hokmah.ui;
  */
 public class UiHandler {
 
-    public UiHandler(){
+    public UiHandler() {
 
     }
 
     /**
      * Displays decorative separator line.
      */
-    public void showLine(){
+    public void showLine() {
         System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
     }
 
     /**
      * Displays application welcome message and logo.
      */
-    public void showWelcomeMessage(){
+    public void showWelcomeMessage() {
         String logo = ",--.  ,--.         ,--.                         ,--.     \n"
                 + "|  '--'  |  ,---.  |  |,-.  ,--,--,--.  ,--,--. |  ,---. \n"
                 + "|  .--.  | | .-. | |     /  |        | ' ,-.  | |  .-.  |\n"
@@ -38,7 +38,7 @@ public class UiHandler {
     /**
      * Displays exit message when closing application.
      */
-    public void showExitMessage(){
+    public void showExitMessage() {
         String message = "Goodbye! I hope you come back soon! ヾ(＾ ∇ ＾).";
         System.out.println(message);
     }

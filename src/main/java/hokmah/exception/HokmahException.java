@@ -7,7 +7,7 @@ import hokmah.Hokmah;
  * Custom exception class for task management errors.
  * Encapsulates specific error types and formatted messages.
  */
-public class HokmahException extends Exception{
+public class HokmahException extends Exception {
     /**
      * Enumeration of possible exception types.
      */
@@ -26,6 +26,7 @@ public class HokmahException extends Exception{
 
     /**
      * Constructs exception with specific error type.
+     *
      * @param type Category of exception
      * @throws HokmahException Always throws new instance
      */
@@ -48,7 +49,7 @@ public class HokmahException extends Exception{
         } else if (type == ExceptionType.NO_UPCOMING_ON_DATE) {
             message = "I don't know when you want to see the upcoming tasks. Try again by adding /on "
                     + Hokmah.DATE_TIME_FORMAT;
-        else if(type == ExceptionType.SEARCH_FAILED) {
+        } else if (type == ExceptionType.SEARCH_FAILED) {
             message = "Can you specify a search term? Something like this: find [keyword]";
         } else {
 

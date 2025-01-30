@@ -13,6 +13,7 @@ public class Task {
 
     /**
      * Constructs a Task with the specified name.
+     *
      * @param name The name/description of the task
      */
     public Task(String name) {
@@ -36,14 +37,16 @@ public class Task {
 
     /**
      * Returns the task type identifier.
+     *
      * @return String representing task type (to be overridden by subclasses)
      */
-    public String getType(){
+    public String getType() {
         return this.getClass().getName();
     }
 
     /**
      * Checks if the task is completed.
+     *
      * @return true if task is marked done, false otherwise
      */
     public boolean isDone() {
@@ -52,6 +55,7 @@ public class Task {
 
     /**
      * Gets the task name.
+     *
      * @return The name/description of the task
      */
     public String getName() {
@@ -60,6 +64,7 @@ public class Task {
 
     /**
      * Gets the start time (for event tasks).
+     *
      * @return null for base Task class (to be overridden by subclasses)
      */
     public LocalDateTime getTimeStart() {
@@ -68,6 +73,7 @@ public class Task {
 
     /**
      * Gets the end time (for deadline/event tasks).
+     *
      * @return null for base Task class (to be overridden by subclasses)
      */
     public LocalDateTime getTimeEnd() {
@@ -76,6 +82,7 @@ public class Task {
 
     /**
      * Returns formatted string representation of the task.
+     *
      * @return String showing completion status and name
      */
     public String toString() {
@@ -91,6 +98,7 @@ public class Task {
 
     /**
      * Generates save-friendly text representation.
+     *
      * @return Pipe-separated values for storage
      */
     public String getSaveText() {

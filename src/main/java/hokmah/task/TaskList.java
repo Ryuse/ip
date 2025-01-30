@@ -19,22 +19,25 @@ public class TaskList {
 
     /**
      * Gets the underlying task collection.
+     *
      * @return ArrayList containing tasks
      */
-    public ArrayList<Task> getTaskArrayList(){
+    public ArrayList<Task> getTaskArrayList() {
         return taskArrayList;
     }
 
     /**
      * Replaces the current task list with a new collection.
+     *
      * @param newTaskArrayList The new collection of tasks
      */
-    public void setTaskArrayList(ArrayList<Task> newTaskArrayList){
+    public void setTaskArrayList(ArrayList<Task> newTaskArrayList) {
         taskArrayList = newTaskArrayList;
     }
 
     /**
      * Adds a task to the list.
+     *
      * @param task The task to add
      */
     public void add(Task task) {
@@ -44,6 +47,7 @@ public class TaskList {
 
     /**
      * Removes a task from the list.
+     *
      * @param task The task to remove
      */
     public void delete(Task task) {
@@ -52,6 +56,7 @@ public class TaskList {
 
     /**
      * Gets the number of tasks in the list.
+     *
      * @return Current task count
      */
     public int size() {
