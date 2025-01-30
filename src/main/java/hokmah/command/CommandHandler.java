@@ -29,10 +29,11 @@ public class CommandHandler {
     }
 
     public Task getTask(int id) throws HokmahException {
-        if (id - 1 < 0 || id >= tasks.size()) {
+        int index = id - 1;
+        if (index < 0 || index >= tasks.size()) {
             throw new HokmahException(HokmahException.ExceptionType.TASK_NOT_FOUND);
         }
-        return tasks.getTaskArrayList().get(id - 1);
+        return tasks.getTaskArrayList().get(index);
     }
 
     public void markTask(int id) throws HokmahException {

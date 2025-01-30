@@ -59,19 +59,21 @@ public class SaveHandler {
             while (scanner.hasNext()) {
                 String[] taskInfo = scanner.next().split("\\|");
                 String taskType = taskInfo[0];
+                String taskName = taskInfo[2];
                 Task task = null;
                 switch (taskType){
                     case "T":
-                        task = new ToDo(taskInfo[2]);
+                        task = new ToDo(taskName);
                         break;
                     case "D":
                         try{
+                            System.out.println(taskInfo[3]);
                             LocalDateTime DeadlineEndTime = LocalDateTime.parse(taskInfo[3], DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
-                            task = new Deadline(taskInfo[2], DeadlineEndTime);
+                            task = new Deadline(taskName, DeadlineEndTime);
 
                         }
                         catch (DateTimeParseException e){
-                            System.out.println(taskInfo[2] + " is not a valid date time format");
+                            System.out.println(taskName+ " is not a valid date time format");
                         }
 
                         break;
@@ -79,10 +81,10 @@ public class SaveHandler {
                         try{
                             LocalDateTime EventStartTime = LocalDateTime.parse(taskInfo[3], DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
                             LocalDateTime eventEndTime = LocalDateTime.parse(taskInfo[4], DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
-                            task = new Event(taskInfo[2], EventStartTime, eventEndTime);
+                            task = new Event(taskName, EventStartTime, eventEndTime);
                         }
                         catch (DateTimeParseException e){
-                            System.out.println(taskInfo[2] + " is not a valid date time format");
+                            System.out.println(taskName + " is not a valid date time format");
                         }
                         break;
                 }

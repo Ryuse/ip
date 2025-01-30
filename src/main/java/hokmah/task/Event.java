@@ -1,5 +1,7 @@
 package hokmah.task;
 
+import hokmah.Hokmah;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -32,7 +34,10 @@ public class Event extends Task  {
     }
 
     public String getSaveText() {
-        return super.getSaveText() +  "|" + timeStart + "|" + timeEnd;
+        return super.getSaveText() +  "|"
+                + timeStart.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT))
+                + "|"
+                + timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
     }
 
 }

@@ -12,11 +12,11 @@ public class Hokmah {
     public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
 
     static Scanner scanner = new Scanner(System.in);
-    private TaskList tasks;
-    private UiHandler ui;
-    private SaveHandler storage;
-    private InputHandler inputHandler;
-    private CommandHandler commandHandler;
+    protected TaskList tasks;
+    protected UiHandler ui;
+    protected SaveHandler storage;
+    protected InputHandler inputHandler;
+    protected CommandHandler commandHandler;
 
     public Hokmah(String filePath){
         tasks = new TaskList();
