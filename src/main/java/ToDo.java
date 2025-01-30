@@ -3,6 +3,10 @@ public class ToDo extends Task  {
         super(name);
     }
 
+    public String getType(){
+        return "T";
+    }
+
     public String toString() {
         return "[T]" + super.toString();
     }

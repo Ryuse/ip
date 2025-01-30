@@ -5,6 +5,7 @@ public class Hokmah {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Task> taskArrayList = new ArrayList<>();
     public static void main(String[] args) {
+        taskArrayList = SaveHandler.loadFromFile(SaveHandler.TASKS_FILE_PATH);
         greet();
         messageHandler();
     }
@@ -36,23 +37,29 @@ public class Hokmah {
             case "mark":
                 int mark_id = Integer.parseInt(inputArray[1]);
                 markTask(mark_id);
+                SaveHandler.saveToFile(taskArrayList, SaveHandler.TASKS_FILE_PATH);
                 break;
             case "unmark":
                 int unmark_id = Integer.parseInt(inputArray[1]);
                 unmarkTask(unmark_id);
+                SaveHandler.saveToFile(taskArrayList, SaveHandler.TASKS_FILE_PATH);
                 break;
             case "delete":
                 int delete_id = Integer.parseInt(inputArray[1]);
                 deleteTask(delete_id);
+                SaveHandler.saveToFile(taskArrayList, SaveHandler.TASKS_FILE_PATH);
                 break;
             case "todo":
                 addTodo(inputArray);
+                SaveHandler.saveToFile(taskArrayList, SaveHandler.TASKS_FILE_PATH);
                 break;
             case "deadline":
                 addDeadline(inputArray);
+                SaveHandler.saveToFile(taskArrayList, SaveHandler.TASKS_FILE_PATH);
                 break;
             case "event":
                 addEvent(inputArray);
+                SaveHandler.saveToFile(taskArrayList, SaveHandler.TASKS_FILE_PATH);
                 break;
             case "help":
                 help();
