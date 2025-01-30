@@ -8,6 +8,7 @@ public class HokmahException extends Exception{
         NO_UPCOMING_ON_DATE
 
     }
+    static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
 
     public HokmahException(ExceptionType type) throws HokmahException {
         String message = "";

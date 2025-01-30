@@ -9,9 +9,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SaveHandler {
-    static final String TASKS_FILE_PATH = "data/tasks.txt";
 
-    public static void saveToFile(ArrayList<Task> tasks, String path){
+    private String filePath;
+
+
+    public SaveHandler(String filePath){
+        this.filePath = filePath;
+    }
+
+    public void saveToFile(ArrayList<Task> tasks, String path){
         File file = new File(path);
         try {
             file.getParentFile().mkdirs();
@@ -30,9 +36,14 @@ public class SaveHandler {
         }
     }
 
-    public static ArrayList<Task> loadFromFile(String path){
+    public void saveToFile(ArrayList<Task> tasks){
+        saveToFile(tasks, filePath);
+    }
+
+    public ArrayList<Task> loadFromFile(String path){
         ArrayList<Task> tasks = new ArrayList<Task>();
         File file = new File(path);
+
         try {
             file.getParentFile().mkdirs();
 
@@ -81,5 +92,9 @@ public class SaveHandler {
             e.printStackTrace();
         }
         return tasks;
+    }
+
+    public ArrayList<Task> loadFromFile() {
+        return loadFromFile(filePath);
     }
 }
