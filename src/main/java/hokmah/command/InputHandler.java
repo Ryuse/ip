@@ -2,14 +2,27 @@ package hokmah.command;
 
 import hokmah.exception.HokmahException;
 
+/**
+ * Parses and routes user input to appropriate command processors.
+ * Acts as bridge between raw input and command execution.
+ */
 public class InputHandler {
 
     private CommandHandler commandHandler;
 
+    /**
+     * Initializes with command handler dependency.
+     * @param commandHandler Command processor instance
+     */
     public InputHandler(CommandHandler commandHandler){
         this.commandHandler = commandHandler;
     }
 
+    /**
+     * Processes and executes user input commands.
+     * @param input Raw user input string
+     * @throws HokmahException For invalid commands or parameters
+     */
     public void process(String input) throws HokmahException {
         String[] inputArray = input.split(" ", 2);
         String command = inputArray[0];

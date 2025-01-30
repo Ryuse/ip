@@ -14,15 +14,27 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles persistent storage operations for tasks.
+ * Manages loading/saving tasks to/from files in pipe-separated format.
+ */
 public class SaveHandler {
 
     private String filePath;
 
-
+    /**
+     * Initializes storage handler with file path.
+     * @param filePath Storage file location
+     */
     public SaveHandler(String filePath){
         this.filePath = filePath;
     }
 
+    /**
+     * Saves tasks to specified file path.
+     * @param tasks List of tasks to save
+     * @param path Custom save location
+     */
     public void saveToFile(ArrayList<Task> tasks, String path){
         File file = new File(path);
         try {
@@ -42,10 +54,19 @@ public class SaveHandler {
         }
     }
 
+    /**
+     * Saves tasks to default file path.
+     * @param tasks List of tasks to save
+     */
     public void saveToFile(ArrayList<Task> tasks){
         saveToFile(tasks, filePath);
     }
 
+    /**
+     * Loads tasks from specified file path.
+     * @param path Custom load location
+     * @return List of loaded tasks
+     */
     public ArrayList<Task> loadFromFile(String path){
         ArrayList<Task> tasks = new ArrayList<Task>();
         File file = new File(path);
@@ -102,6 +123,10 @@ public class SaveHandler {
         return tasks;
     }
 
+    /**
+     * Loads tasks from default file path.
+     * @return List of loaded tasks
+     */
     public ArrayList<Task> loadFromFile() {
         return loadFromFile(filePath);
     }
