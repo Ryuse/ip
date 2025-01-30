@@ -18,6 +18,10 @@ public class Hokmah {
     protected InputHandler inputHandler;
     protected CommandHandler commandHandler;
 
+    /**
+     * Initializes application components.
+     * @param filePath Path for task data storage
+     */
     public Hokmah(String filePath){
         tasks = new TaskList();
         ui = new UiHandler();
@@ -30,15 +34,16 @@ public class Hokmah {
         ui.showWelcomeMessage();
     }
 
+    /**
+     * Starts main application loop.
+     */
     public void run(){
         messageHandler();
     }
 
-
-    public static void main(String[] args) {
-        new Hokmah("data/tasks.txt").run();
-    }
-
+    /**
+     * Handles continuous user input processing.
+     */
     public void messageHandler(){
         while(true) {
             String input = scanner.nextLine();
@@ -51,6 +56,10 @@ public class Hokmah {
             }
             ui.showLine();
         }
+    }
+
+    public static void main(String[] args) {
+        new Hokmah("data/tasks.txt").run();
     }
 
 }

@@ -3,6 +3,9 @@ package hokmah.exception;
 import hokmah.Hokmah;
 
 public class HokmahException extends Exception{
+    /**
+     * Enumeration of possible exception types.
+     */
     public enum ExceptionType {
         NO_NAME,
         DEADLINE_NO_TIME_END,
@@ -14,6 +17,11 @@ public class HokmahException extends Exception{
     }
     static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
 
+    /**
+     * Constructs exception with specific error type.
+     * @param type Category of exception
+     * @throws HokmahException Always throws new instance
+     */
     public HokmahException(ExceptionType type) throws HokmahException {
         String message = "";
         if(type == ExceptionType.NO_NAME){

@@ -6,18 +6,16 @@ public class UiHandler {
 
     }
 
-    public void showLoading(){
-        System.out.println("Loading");
-    }
-
-    public void showLoadingError(){
-        System.out.println("Loading Error");
-    }
-
+    /**
+     * Displays decorative separator line.
+     */
     public void showLine(){
         System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
     }
 
+    /**
+     * Displays application welcome message and logo.
+     */
     public void showWelcomeMessage(){
         String logo = ",--.  ,--.         ,--.                         ,--.     \n"
                     + "|  '--'  |  ,---.  |  |,-.  ,--,--,--.  ,--,--. |  ,---. \n"
@@ -32,6 +30,9 @@ public class UiHandler {
         showLine();
     }
 
+    /**
+     * Displays exit message when closing application.
+     */
     public void showExitMessage(){
         String message = "Goodbye! I hope you come back soon! ヾ(＾ ∇ ＾).";
         System.out.println(message);
