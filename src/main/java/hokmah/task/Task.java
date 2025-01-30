@@ -19,7 +19,7 @@ public class Task {
         isDone = false;
     }
 
-    public String getType(){
+    public String getType() {
         return this.getClass().getName();
     }
 
@@ -43,8 +43,7 @@ public class Task {
         String output = "";
         if (isDone) {
             output += "[X] ";
-        }
-        else{
+        } else {
             output += "[ ] ";
         }
         output += name;
@@ -56,8 +55,7 @@ public class Task {
         output += getType() + "|";
         if (isDone) {
             output += "1";
-        }
-        else{
+        } else {
             output += "0";
         }
         output += "|" + name;

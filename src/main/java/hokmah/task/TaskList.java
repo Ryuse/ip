@@ -9,11 +9,11 @@ public class TaskList {
         taskArrayList = new ArrayList<>();
     }
 
-    public ArrayList<Task> getTaskArrayList(){
+    public ArrayList<Task> getTaskArrayList() {
         return taskArrayList;
     }
 
-    public void setTaskArrayList(ArrayList<Task> newTaskArrayList){
+    public void setTaskArrayList(ArrayList<Task> newTaskArrayList) {
         taskArrayList = newTaskArrayList;
     }
 
@@ -32,7 +32,7 @@ public class TaskList {
 
     public void printTasks() {
         for (Task task : taskArrayList) {
-            if(task != null) System.out.println(task);
+            if (task != null) System.out.println(task);
         }
     }
 }

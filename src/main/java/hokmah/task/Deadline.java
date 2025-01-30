@@ -5,8 +5,9 @@ import hokmah.Hokmah;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task  {
+public class Deadline extends Task {
     LocalDateTime timeEnd;
+
     public Deadline(String name, LocalDateTime timeEnd) {
         super(name);
         this.timeEnd = timeEnd;
@@ -16,7 +17,7 @@ public class Deadline extends Task  {
         return timeEnd;
     }
 
-    public String getType(){
+    public String getType() {
         return "D";
     }
 
@@ -27,6 +28,6 @@ public class Deadline extends Task  {
     public String getSaveText() {
         return super.getSaveText() +
                 "|" +
-                timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT)) ;
+                timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
     }
 }

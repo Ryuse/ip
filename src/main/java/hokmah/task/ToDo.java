@@ -1,11 +1,11 @@
 package hokmah.task;
 
-public class ToDo extends Task  {
+public class ToDo extends Task {
     public ToDo(String name) {
         super(name);
     }
 
-    public String getType(){
+    public String getType() {
         return "T";
     }
 

@@ -18,7 +18,7 @@ public class Hokmah {
     protected InputHandler inputHandler;
     protected CommandHandler commandHandler;
 
-    public Hokmah(String filePath){
+    public Hokmah(String filePath) {
         tasks = new TaskList();
         ui = new UiHandler();
         storage = new SaveHandler(filePath);
@@ -30,7 +30,7 @@ public class Hokmah {
         ui.showWelcomeMessage();
     }
 
-    public void run(){
+    public void run() {
         messageHandler();
     }
 
@@ -39,14 +39,13 @@ public class Hokmah {
         new Hokmah("data/tasks.txt").run();
     }
 
-    public void messageHandler(){
-        while(true) {
+    public void messageHandler() {
+        while (true) {
             String input = scanner.nextLine();
             ui.showLine();
-            try{
+            try {
                 inputHandler.process(input);
-            }
-            catch(HokmahException e){
+            } catch (HokmahException e) {
                 System.out.println(e.getMessage());
             }
             ui.showLine();

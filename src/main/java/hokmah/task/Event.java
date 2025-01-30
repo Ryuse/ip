@@ -5,7 +5,7 @@ import hokmah.Hokmah;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task  {
+public class Event extends Task {
     LocalDateTime timeStart;
     LocalDateTime timeEnd;
 
@@ -23,7 +23,7 @@ public class Event extends Task  {
         return timeEnd;
     }
 
-    public String getType(){
+    public String getType() {
         return "E";
     }
 
@@ -34,7 +34,7 @@ public class Event extends Task  {
     }
 
     public String getSaveText() {
-        return super.getSaveText() +  "|"
+        return super.getSaveText() + "|"
                 + timeStart.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT))
                 + "|"
                 + timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));

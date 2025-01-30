@@ -2,28 +2,16 @@ package hokmah.ui;
 
 public class UiHandler {
 
-    public UiHandler(){
-
-    }
-
-    public void showLoading(){
-        System.out.println("Loading");
-    }
-
-    public void showLoadingError(){
-        System.out.println("Loading Error");
-    }
-
-    public void showLine(){
+    public void showLine() {
         System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
     }
 
-    public void showWelcomeMessage(){
+    public void showWelcomeMessage() {
         String logo = ",--.  ,--.         ,--.                         ,--.     \n"
-                    + "|  '--'  |  ,---.  |  |,-.  ,--,--,--.  ,--,--. |  ,---. \n"
-                    + "|  .--.  | | .-. | |     /  |        | ' ,-.  | |  .-.  |\n"
-                    + "|  |  |  | ' '-' ' |  \\  \\  |  |  |  | \\ '-'  | |  | |  |\n"
-                    + "`--'  `--'  `---'  `--'`--' `--`--`--'  `--`--' `--' `--' \n";
+                + "|  '--'  |  ,---.  |  |,-.  ,--,--,--.  ,--,--. |  ,---. \n"
+                + "|  .--.  | | .-. | |     /  |        | ' ,-.  | |  .-.  |\n"
+                + "|  |  |  | ' '-' ' |  \\  \\  |  |  |  | \\ '-'  | |  | |  |\n"
+                + "`--'  `--'  `---'  `--'`--' `--`--`--'  `--`--' `--' `--' \n";
 
         String message = "Hello, I am\n" +
                 logo + "\n" +
@@ -32,7 +20,7 @@ public class UiHandler {
         showLine();
     }
 
-    public void showExitMessage(){
+    public void showExitMessage() {
         String message = "Goodbye! I hope you come back soon! ヾ(＾ ∇ ＾).";
         System.out.println(message);
     }
