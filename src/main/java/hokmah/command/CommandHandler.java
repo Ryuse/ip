@@ -9,18 +9,31 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Executes concrete operations based on parsed commands.
+ * Contains business logic for task manipulation and system operations.
+ */
 public class CommandHandler {
     static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
     TaskList tasks;
     SaveHandler storage;
     UiHandler ui;
 
+    /**
+     * Initializes command handler with dependencies.
+     * @param tasks Task collection to operate on
+     * @param storage Persistent storage handler
+     * @param ui User interface handler
+     */
     public CommandHandler(TaskList tasks, SaveHandler storage, UiHandler ui) {
         this.tasks = tasks;
         this.storage = storage;
         this.ui = ui;
     }
 
+    /**
+     * Displays all tasks in formatted list.
+     */
     public void showList() {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.getTaskArrayList().get(i);
@@ -28,6 +41,12 @@ public class CommandHandler {
         }
     }
 
+    /**
+     * Retrieves task by ID.
+     * @param id Task index (1-based)
+     * @return Requested Task object
+     * @throws HokmahException For invalid task IDs
+     */
     public Task getTask(int id) throws HokmahException {
         int index = id - 1;
         if (index < 0 || index >= tasks.size()) {
@@ -36,6 +55,11 @@ public class CommandHandler {
         return tasks.getTaskArrayList().get(index);
     }
 
+    /**
+     * Marks task as completed.
+     * @param id Task index to mark
+     * @throws HokmahException For invalid task IDs
+     */
     public void markTask(int id) throws HokmahException {
         Task task = getTask(id);
         task.markDone();
@@ -44,14 +68,23 @@ public class CommandHandler {
 
     }
 
+    /**
+     * Marks a task as incomplete.
+     * @param id The 1-based index of the task to unmark
+     * @throws HokmahException If the index is invalid
+     */
     public void unmarkTask(int id) throws HokmahException {
         Task task = getTask(id);
         task.unmarkDone();
         System.out.println("Nice! I've masked this task as not done yet:");
         System.out.println(task);
-        storage.saveToFile(tasks.getTaskArrayList());
     }
 
+    /**
+     * Deletes a task from the list and saves the updated list.
+     * @param id The 1-based index of the task to delete
+     * @throws HokmahException If the index is invalid
+     */
     public void deleteTask(int id) throws HokmahException {
         Task task = getTask(id);
         tasks.delete(task);
@@ -60,6 +93,11 @@ public class CommandHandler {
         storage.saveToFile(tasks.getTaskArrayList());
     }
 
+    /**
+     * Adds a new Todo task to the list and saves the updated list.
+     * @param inputArray The parsed command input
+     * @throws HokmahException If the task name is missing
+     */
     public void addTodo(String[] inputArray) throws HokmahException {
         if (inputArray.length == 1) {
             throw new HokmahException(HokmahException.ExceptionType.NO_NAME);
@@ -72,6 +110,11 @@ public class CommandHandler {
         storage.saveToFile(tasks.getTaskArrayList());
     }
 
+    /**
+     * Adds a new Deadline task to the list and saves the updated list.
+     * @param inputArray The parsed command input
+     * @throws HokmahException If the format is invalid or datetime parsing fails
+     */
     public void addDeadline(String[] inputArray) throws HokmahException {
         if (inputArray.length == 1) {
             throw new HokmahException(HokmahException.ExceptionType.NO_NAME);
@@ -100,6 +143,11 @@ public class CommandHandler {
         }
     }
 
+    /**
+     * Adds a new Event task to the list and saves the updated list.
+     * @param inputArray The parsed command input
+     * @throws HokmahException If the format is invalid or datetime parsing fails
+     */
     public void addEvent(String[] inputArray) throws HokmahException {
         if (inputArray.length == 1) {
             throw new HokmahException(HokmahException.ExceptionType.NO_NAME);
@@ -136,6 +184,9 @@ public class CommandHandler {
         }
     }
 
+    /**
+     * Displays a message for unsupported commands.
+     */
     public void unsupportedCommand() {
         System.out.println("""
                 That's not right
@@ -144,6 +195,9 @@ public class CommandHandler {
 
     }
 
+    /**
+     * Displays help information with available commands and formats.
+     */
     public void help() {
         System.out.println("Here is what I can do:");
         String taskList = "list\n\t(Shows all the tasks in the list)\n" +
@@ -158,6 +212,11 @@ public class CommandHandler {
         System.out.println(taskList);
     }
 
+    /**
+     * Shows tasks occurring on a specific date and saves the updated list.
+     * @param inputArray The parsed command input
+     * @throws HokmahException If the date format is invalid
+     */
     public void upcomingTasksOn(String[] inputArray) throws HokmahException {
         if (inputArray.length == 1) {
             throw new HokmahException(HokmahException.ExceptionType.NO_UPCOMING_ON_DATE);
@@ -189,6 +248,9 @@ public class CommandHandler {
         }
     }
 
+    /**
+     * Initiates application shutdown sequence.
+     */
     public void exit() {
         ui.showExitMessage();
         System.exit(0);
