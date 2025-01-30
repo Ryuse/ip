@@ -8,6 +8,10 @@ import hokmah.ui.UiHandler;
 
 import java.util.Scanner;
 
+/**
+ * Main application class for the task management system.
+ * Initializes core components and manages the program lifecycle.
+ */
 public class Hokmah {
     public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
 
@@ -18,6 +22,10 @@ public class Hokmah {
     protected InputHandler inputHandler;
     protected CommandHandler commandHandler;
 
+    /**
+     * Initializes application components.
+     * @param filePath Path for task data storage
+     */
     public Hokmah(String filePath){
         tasks = new TaskList();
         ui = new UiHandler();
@@ -30,27 +38,33 @@ public class Hokmah {
         ui.showWelcomeMessage();
     }
 
+
+    /**
+     * Starts main application loop.
+     */
     public void run(){
         messageHandler();
     }
 
-
-    public static void main(String[] args) {
-        new Hokmah("data/tasks.txt").run();
-    }
-
+    /**
+     * Handles continuous user input processing.
+     */
     public void messageHandler(){
         while(true) {
+
             String input = scanner.nextLine();
             ui.showLine();
-            try{
+            try {
                 inputHandler.process(input);
-            }
-            catch(HokmahException e){
+            } catch (HokmahException e) {
                 System.out.println(e.getMessage());
             }
             ui.showLine();
         }
+    }
+
+    public static void main(String[] args) {
+        new Hokmah("data/tasks.txt").run();
     }
 
 }
