@@ -1,9 +1,9 @@
 package hokmah.task;
 
-import hokmah.Hokmah;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import hokmah.Hokmah;
 
 
 /**
@@ -11,8 +11,8 @@ import java.time.format.DateTimeFormatter;
  * Represents activities occurring between specific start/end times.
  */
 public class Event extends Task {
-    LocalDateTime timeStart;
-    LocalDateTime timeEnd;
+    private LocalDateTime timeStart;
+    private LocalDateTime timeEnd;
 
     /**
      * Constructs an Event task with specified time range.
@@ -61,9 +61,12 @@ public class Event extends Task {
      * @return String with task details and formatted time range
      */
     public String toString() {
-        return "[E]" + super.toString() +
-                " (from: " + timeStart.format(DateTimeFormatter.ofPattern(DATE_STRING_OUTPUT_FORMAT)) +
-                " to: " + timeEnd.format(DateTimeFormatter.ofPattern(DATE_STRING_OUTPUT_FORMAT)) + ")";
+        return "[E]" + super.toString()
+                + " (from: "
+                + timeStart.format(DateTimeFormatter.ofPattern(DATE_STRING_OUTPUT_FORMAT))
+                + " to: "
+                + timeEnd.format(DateTimeFormatter.ofPattern(DATE_STRING_OUTPUT_FORMAT))
+                + ")";
     }
 
     /**

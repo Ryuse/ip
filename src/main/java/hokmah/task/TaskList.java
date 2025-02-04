@@ -12,7 +12,7 @@ public class TaskList {
     /**
      * Constructs an empty TaskList.
      */
-    public TaskList() {  // constructor
+    public TaskList() {
         taskArrayList = new ArrayList<>();
     }
 
@@ -68,7 +68,9 @@ public class TaskList {
      */
     public void printTasks() {
         for (Task task : taskArrayList) {
-            if (task != null) System.out.println(task);
+            if (task != null) {
+                System.out.println(task);
+            }
         }
     }
 }

@@ -1,31 +1,37 @@
 package hokmah.command;
 
-import hokmah.exception.HokmahException;
-import hokmah.SaveHandler;
-import hokmah.task.*;
-import hokmah.ui.UiHandler;
+import static hokmah.Hokmah.DATE_TIME_FORMAT;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
+
+import hokmah.SaveHandler;
+import hokmah.exception.HokmahException;
+import hokmah.task.Deadline;
+import hokmah.task.Event;
+import hokmah.task.Task;
+import hokmah.task.TaskList;
+import hokmah.task.ToDo;
+import hokmah.ui.UiHandler;
+
 
 /**
  * Executes concrete operations based on parsed commands.
  * Contains business logic for task manipulation and system operations.
  */
 public class CommandHandler {
-    static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
-    TaskList tasks;
-    SaveHandler storage;
-    UiHandler ui;
+    private TaskList tasks;
+    private SaveHandler storage;
+    private UiHandler ui;
 
     /**
      * Initializes command handler with dependencies.
-     * @param tasks Task collection to operate on
+     *
+     * @param tasks   Task collection to operate on
      * @param storage Persistent storage handler
-     * @param ui User interface handler
+     * @param ui      User interface handler
      */
     public CommandHandler(TaskList tasks, SaveHandler storage, UiHandler ui) {
         this.tasks = tasks;
@@ -39,12 +45,15 @@ public class CommandHandler {
     public void showList() {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.getTaskArrayList().get(i);
-            if (task != null) System.out.println(i + 1 + "." + task);
+            if (task != null) {
+                System.out.println(i + 1 + "." + task);
+            }
         }
     }
 
     /**
      * Retrieves task by ID.
+     *
      * @param id Task index (1-based)
      * @return Requested Task object
      * @throws HokmahException For invalid task IDs
@@ -59,6 +68,7 @@ public class CommandHandler {
 
     /**
      * Marks task as completed.
+     *
      * @param id Task index to mark
      * @throws HokmahException For invalid task IDs
      */
@@ -70,6 +80,7 @@ public class CommandHandler {
 
     /**
      * Marks a task as incomplete.
+     *
      * @param id The 1-based index of the task to unmark
      * @throws HokmahException If the index is invalid
      */
@@ -81,6 +92,7 @@ public class CommandHandler {
 
     /**
      * Deletes a task from the list and saves the updated list.
+     *
      * @param id The 1-based index of the task to delete
      * @throws HokmahException If the index is invalid
      */
@@ -94,6 +106,7 @@ public class CommandHandler {
 
     /**
      * Adds a new Todo task to the list and saves the updated list.
+     *
      * @param inputArray The parsed command input
      * @throws HokmahException If the task name is missing
      */
@@ -110,6 +123,7 @@ public class CommandHandler {
 
     /**
      * Adds a new Deadline task to the list and saves the updated list.
+     *
      * @param inputArray The parsed command input
      * @throws HokmahException If the format is invalid or datetime parsing fails
      */
@@ -117,6 +131,7 @@ public class CommandHandler {
         if (inputArray.length == 1) {
             throw new HokmahException(HokmahException.ExceptionType.NO_NAME);
         }
+
         String[] taskDetails = inputArray[1].split("/by");
         if (taskDetails.length == 1) {
             throw new HokmahException(HokmahException.ExceptionType.DEADLINE_NO_TIME_END);
@@ -127,7 +142,8 @@ public class CommandHandler {
             String taskName = taskDetails[0].trim();
             String deadline = taskDetails[1].trim();
 
-            LocalDateTime deadlineDate = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+            LocalDateTime deadlineDate = LocalDateTime.parse(deadline,
+                    DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
             Deadline newDeadline = new Deadline(taskName, deadlineDate);
             tasks.add(newDeadline);
 
@@ -142,6 +158,7 @@ public class CommandHandler {
 
     /**
      * Adds a new Event task to the list and saves the updated list.
+     *
      * @param inputArray The parsed command input
      * @throws HokmahException If the format is invalid or datetime parsing fails
      */
@@ -191,6 +208,7 @@ public class CommandHandler {
 
     /**
      * Finds tasks containing the specified keyword in their description
+     *
      * @param inputArray The parsed command input
      */
     public void findCommand(String[] inputArray) throws HokmahException {
@@ -202,7 +220,7 @@ public class CommandHandler {
         ArrayList<Task> matches = new ArrayList<>();
 
         for (Task task : tasks.getTaskArrayList()) {
-            if(task == null){
+            if (task == null) {
                 continue;
             }
 
@@ -230,6 +248,7 @@ public class CommandHandler {
 
     /**
      * Shows tasks occurring on a specific date and saves the updated list.
+     *
      * @param inputArray The parsed command input
      * @throws HokmahException If the date format is invalid
      */
@@ -240,17 +259,20 @@ public class CommandHandler {
 
         try {
             String[] taskDetails = inputArray[1].split("/on");
-               if (taskDetails.length < 2) {
-                   throw new HokmahException(HokmahException.ExceptionType.NO_UPCOMING_ON_DATE);
-               }
+            if (taskDetails.length < 2) {
+                throw new HokmahException(HokmahException.ExceptionType.NO_UPCOMING_ON_DATE);
+            }
             String date = taskDetails[1].trim();
             LocalDateTime dateToCheck = LocalDateTime.parse(date, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
 
 
             int upcomingTasks = 0;
-            System.out.println("Upcoming tasks on " + dateToCheck.format(DateTimeFormatter.ofPattern(Task.DATE_STRING_OUTPUT_FORMAT)) + ":");
+            System.out.println("Upcoming tasks on "
+                    + dateToCheck.format(DateTimeFormatter.ofPattern(Task.DATE_STRING_OUTPUT_FORMAT))
+                    + ":");
+
             for (Task task : tasks.getTaskArrayList()) {
-                if (task.getTimeEnd()  != null && task.getTimeEnd().equals(dateToCheck)) {
+                if (task.getTimeEnd() != null && task.getTimeEnd().equals(dateToCheck)) {
                     System.out.println(task);
                     upcomingTasks += 1;
                 }

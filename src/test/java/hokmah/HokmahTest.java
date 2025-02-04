@@ -1,19 +1,24 @@
 package hokmah;
 
-import hokmah.exception.HokmahException;
-import hokmah.task.Deadline;
-import hokmah.task.Event;
-import hokmah.task.Task;
-import hokmah.task.ToDo;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import hokmah.exception.HokmahException;
+import hokmah.task.Deadline;
+import hokmah.task.Event;
+import hokmah.task.Task;
+import hokmah.task.ToDo;
 
 public class HokmahTest {
     private Hokmah hokmah;

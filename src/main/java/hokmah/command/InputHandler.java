@@ -8,7 +8,7 @@ import hokmah.exception.HokmahException;
  */
 public class InputHandler {
 
-    private CommandHandler commandHandler;
+    private final CommandHandler commandHandler;
 
 
     /**

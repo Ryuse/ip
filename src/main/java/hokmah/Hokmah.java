@@ -1,12 +1,12 @@
 package hokmah;
 
+import java.util.Scanner;
+
 import hokmah.command.CommandHandler;
 import hokmah.command.InputHandler;
 import hokmah.exception.HokmahException;
 import hokmah.task.TaskList;
 import hokmah.ui.UiHandler;
-
-import java.util.Scanner;
 
 /**
  * Main application class for the task management system.

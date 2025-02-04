@@ -1,8 +1,9 @@
 package hokmah.ui;
 
+import static hokmah.Hokmah.DATE_TIME_FORMAT;
 
 import hokmah.task.Task;
-import static hokmah.Hokmah.DATE_TIME_FORMAT;
+
 
 /**
  * Manages user interface interactions and formatted output.
@@ -49,7 +50,7 @@ public class UiHandler {
     /**
      * Displays task addition confirmation message.
      *
-     * @param task The newly added task
+     * @param task      The newly added task
      * @param taskCount The new total number of tasks
      */
     public void showAddTaskMessage(Task task, int taskCount) {
@@ -74,16 +75,18 @@ public class UiHandler {
      */
     public void showHelpMessage() {
         System.out.println("You seriously need help? Fine. Here is what I can do:");
-        String taskList = "list\n\t(Shows all the tasks in the list)\n" +
-                "todo [name]\n\t(Adds a todo task to the task list)\n" +
-                "deadline [name] /by [" + DATE_TIME_FORMAT + "]\n\t(Adds a deadline task to the task list)\n" +
-                "event [name] /from [" + DATE_TIME_FORMAT + "] /to [" + DATE_TIME_FORMAT + "]\n\t(Adds a event task to the task list)\n" +
-                "mark [task number]\n\t (Marks the task at [task number] in the task list as completed)\n" +
-                "unmark [task number]\n\t (Marks the task at [task number] in the task list as incomplete)\n" +
-                "delete [task number]\n\t (Deletes the task at [task number] in the task list)\n" +
-                "upcoming /on [" + DATE_TIME_FORMAT + "]\n\t (Shows all the tasks that are happening on the given date)\n" +
-                "find [keyword]\n\t (Finds tasks containing the specified keyword)\n" +
-                "bye\n\t(Only if you want to leave. It's not like I wanted you to be here.)";
+        String taskList = "list\n\t(Shows all the tasks in the list)\n"
+                + "todo [name]\n\t(Adds a todo task to the task list)\n"
+                + "deadline [name] /by [" + DATE_TIME_FORMAT + "]\n\t(Adds a deadline task to the task list)\n"
+                + "event [name] /from [" + DATE_TIME_FORMAT + "] /to [" + DATE_TIME_FORMAT
+                    + "]\n\t(Adds a event task to the task list)\n"
+                + "mark [task number]\n\t (Marks the task at [task number] in the task list as completed)\n"
+                + "unmark [task number]\n\t (Marks the task at [task number] in the task list as incomplete)\n"
+                + "delete [task number]\n\t (Deletes the task at [task number] in the task list)\n"
+                + "upcoming /on [" + DATE_TIME_FORMAT
+                    + "]\n\t (Shows all the tasks that are happening on the given date)\n"
+                + "find [keyword]\n\t (Finds tasks containing the specified keyword)\n"
+                + "bye\n\t(Only if you want to leave. It's not like I wanted you to be here.)";
         System.out.println(taskList);
 
     }
@@ -98,9 +101,10 @@ public class UiHandler {
                 + "|  |  |  | ' '-' ' |  \\  \\  |  |  |  | \\ '-'  | |  | |  |\n"
                 + "`--'  `--'  `---'  `--'`--' `--`--`--'  `--`--' `--' `--' \n";
 
-        String message = "I'm\n" +
-                logo + "\n" +
-                "What do you want?";
+        String message = "I'm\n"
+                        + logo
+                        + "\n"
+                        + "What do you want?";
         System.out.println(message);
         showLine();
     }
