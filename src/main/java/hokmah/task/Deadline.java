@@ -1,9 +1,9 @@
 package hokmah.task;
 
-import hokmah.Hokmah;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import hokmah.Hokmah;
 
 
 /**
@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * Represents tasks requiring completion by specific date/time.
  */
 public class Deadline extends Task {
-    LocalDateTime timeEnd;
+    private LocalDateTime timeEnd;
 
     /**
      * Constructs a Deadline task.
@@ -49,7 +49,10 @@ public class Deadline extends Task {
      * @return String with task details and formatted deadline
      */
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + timeEnd.format(DateTimeFormatter.ofPattern(DATE_STRING_OUTPUT_FORMAT)) + ")";
+        return "[D]" + super.toString()
+                + " (by: "
+                + timeEnd.format(DateTimeFormatter.ofPattern(DATE_STRING_OUTPUT_FORMAT))
+                + ")";
     }
 
     /**
@@ -58,8 +61,8 @@ public class Deadline extends Task {
      * @return Pipe-separated values including deadline time
      */
     public String getSaveText() {
-        return super.getSaveText() +
-                "|" +
-                timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+        return super.getSaveText()
+                + "|"
+                + timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
     }
 }
