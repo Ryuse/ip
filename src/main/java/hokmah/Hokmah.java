@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Hokmah {
     public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
 
-    static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
     protected TaskList tasks;
     protected UiHandler ui;
     protected SaveHandler storage;

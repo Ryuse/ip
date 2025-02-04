@@ -65,9 +65,7 @@ public class CommandHandler {
     public void markTask(int id) throws HokmahException {
         Task task = getTask(id);
         task.markDone();
-        System.out.println("Nice! I've masked this task as done:");
-        System.out.println(task);
-
+        ui.showMarkTaskMessage(task);
     }
 
     /**
@@ -78,8 +76,7 @@ public class CommandHandler {
     public void unmarkTask(int id) throws HokmahException {
         Task task = getTask(id);
         task.unmarkDone();
-        System.out.println("Nice! I've masked this task as not done yet:");
-        System.out.println(task);
+        ui.showUnmarkTaskMessage(task);
     }
 
     /**
@@ -107,8 +104,7 @@ public class CommandHandler {
         String taskName = inputArray[1];
         ToDo newTodo = new ToDo(taskName);
         tasks.add(newTodo);
-        System.out.println("Got it. I've added this task:\n" + newTodo);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        ui.showAddTaskMessage(newTodo, tasks.size());
         storage.saveToFile(tasks.getTaskArrayList());
     }
 
@@ -135,8 +131,7 @@ public class CommandHandler {
             Deadline newDeadline = new Deadline(taskName, deadlineDate);
             tasks.add(newDeadline);
 
-            System.out.println("Got it. I've added this task:\n" + newDeadline);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            ui.showAddTaskMessage(newDeadline, tasks.size());
 
             storage.saveToFile(tasks.getTaskArrayList());
 
@@ -178,8 +173,9 @@ public class CommandHandler {
             Event newEvent = new Event(taskName, eventStartTimeDate, eventEndTimeDate);
 
             tasks.add(newEvent);
-            System.out.println("Got it. I've added this task:\n" + newEvent);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+
+            ui.showAddTaskMessage(newEvent, tasks.size());
+
             storage.saveToFile(tasks.getTaskArrayList());
         } catch (DateTimeParseException e) {
             throw new HokmahException(HokmahException.ExceptionType.EVENT_NO_TIME_START);
@@ -190,11 +186,7 @@ public class CommandHandler {
      * Displays a message for unsupported commands.
      */
     public void unsupportedCommand() {
-        System.out.println("""
-                That's not right
-                Just what are you trying to do? Can you ask something else?
-                If you don't know what to ask you can use the 'help' command""");
-
+        ui.showUnsupportedCommandMessage();
     }
 
     /**
@@ -233,18 +225,7 @@ public class CommandHandler {
      * Displays help information with available commands and formats.
      */
     public void help() {
-        System.out.println("Here is what I can do:");
-        String taskList = "list\n\t(Shows all the tasks in the list)\n" +
-                "todo [name]\n\t(Adds a todo task to the task list)\n" +
-                "deadline [name] /by [" + DATE_TIME_FORMAT + "]\n\t(Adds a deadline task to the task list)\n" +
-                "event [name] /from [" + DATE_TIME_FORMAT + "] /to [" + DATE_TIME_FORMAT + "]\n\t(Adds a event task to the task list)\n" +
-                "mark [task number]\n\t (Marks the task at [task number] in the task list as completed)\n" +
-                "unmark [task number]\n\t (Marks the task at [task number] in the task list as incomplete)\n" +
-                "delete [task number]\n\t (Deletes the task at [task number] in the task list)\n" +
-                "upcoming /on [" + DATE_TIME_FORMAT + "]\n\t (Shows all the tasks that are happening on the given date)\n" +
-                "find [keyword]\n\t (Finds tasks containing the specified keyword)\n" +
-                "bye\n\t(Only if you want to leave. It's not like I wanted you to be here.)";
-        System.out.println(taskList);
+        ui.showHelpMessage();
     }
 
     /**
@@ -259,7 +240,9 @@ public class CommandHandler {
 
         try {
             String[] taskDetails = inputArray[1].split("/on");
-
+               if (taskDetails.length < 2) {
+                   throw new HokmahException(HokmahException.ExceptionType.NO_UPCOMING_ON_DATE);
+               }
             String date = taskDetails[1].trim();
             LocalDateTime dateToCheck = LocalDateTime.parse(date, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
 
@@ -267,7 +250,7 @@ public class CommandHandler {
             int upcomingTasks = 0;
             System.out.println("Upcoming tasks on " + dateToCheck.format(DateTimeFormatter.ofPattern(Task.DATE_STRING_OUTPUT_FORMAT)) + ":");
             for (Task task : tasks.getTaskArrayList()) {
-                if (task.getTimeEnd().equals(dateToCheck)) {
+                if (task.getTimeEnd()  != null && task.getTimeEnd().equals(dateToCheck)) {
                     System.out.println(task);
                     upcomingTasks += 1;
                 }
