@@ -1,4 +1,4 @@
-package hokmah;
+package hokmah.data;
 
 
 import java.io.File;
@@ -10,6 +10,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import hokmah.Hokmah;
 import hokmah.task.Deadline;
 import hokmah.task.Event;
 import hokmah.task.Task;

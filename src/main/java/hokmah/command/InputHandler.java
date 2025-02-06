@@ -23,53 +23,44 @@ public class InputHandler {
     /**
      * Processes and executes user input commands.
      *
-     * @param input Raw user input string
+     * @param input Raw command string from user
+     * @return Result message from command execution
      * @throws HokmahException For invalid commands or parameters
      */
-    public void process(String input) throws HokmahException {
+    public String process(String input) throws HokmahException {
         String[] inputArray = input.split(" ", 2);
         String command = inputArray[0];
 
         switch (command) {
         case "bye":
-            commandHandler.exit();
-            break;
+            return commandHandler.exit();
         case "list":
-            commandHandler.showList();
-            break;
+            return commandHandler.showList();
         case "find":
-            commandHandler.findCommand(inputArray);
-            break;
+            return commandHandler.findCommand(inputArray);
         case "mark":
             int mark_id = Integer.parseInt(inputArray[1]);
-            commandHandler.markTask(mark_id);
-            break;
+            return commandHandler.markTask(mark_id);
         case "unmark":
             int unmark_id = Integer.parseInt(inputArray[1]);
-            commandHandler.unmarkTask(unmark_id);
-            break;
+            return commandHandler.unmarkTask(unmark_id);
         case "delete":
             int delete_id = Integer.parseInt(inputArray[1]);
-            commandHandler.deleteTask(delete_id);
-            break;
+            return commandHandler.deleteTask(delete_id);
         case "todo":
-            commandHandler.addTodo(inputArray);
-            break;
+            return commandHandler.addTodo(inputArray);
         case "deadline":
-            commandHandler.addDeadline(inputArray);
-            break;
+            return commandHandler.addDeadline(inputArray);
         case "event":
-            commandHandler.addEvent(inputArray);
-            break;
+            return commandHandler.addEvent(inputArray);
         case "help":
-            commandHandler.help();
-            break;
+            return commandHandler.help();
         case "upcoming":
-            commandHandler.upcomingTasksOn(inputArray);
-            break;
+            return commandHandler.upcomingTasksOn(inputArray);
+        case "exit":
+            return commandHandler.exit();
         default:
-            commandHandler.unsupportedCommand();
-            break;
+            return commandHandler.unsupportedCommand();
         }
     }
 }

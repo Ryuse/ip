@@ -4,20 +4,23 @@ import java.util.Scanner;
 
 import hokmah.command.CommandHandler;
 import hokmah.command.InputHandler;
+import hokmah.command.MessageHandler;
+import hokmah.data.SaveHandler;
 import hokmah.exception.HokmahException;
 import hokmah.task.TaskList;
-import hokmah.ui.UiHandler;
+
 
 /**
- * Main application class for the task management system.
+ * view.Main application class for the task management system.
  * Initializes core components and manages the program lifecycle.
  */
 public class Hokmah {
     public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
+    public static final String DEFAULT_FILE_DATA_LOCATION = "data/tasks.txt";
 
     private static final Scanner scanner = new Scanner(System.in);
     protected TaskList tasks;
-    protected UiHandler ui;
+    protected MessageHandler ui;
     protected SaveHandler storage;
     protected InputHandler inputHandler;
     protected CommandHandler commandHandler;
@@ -29,14 +32,15 @@ public class Hokmah {
      */
     public Hokmah(String filePath) {
         tasks = new TaskList();
-        ui = new UiHandler();
+        ui = new MessageHandler();
         storage = new SaveHandler(filePath);
         tasks.setTaskArrayList(storage.loadFromFile());
 
         commandHandler = new CommandHandler(tasks, storage, ui);
         inputHandler = new InputHandler(commandHandler);
 
-        ui.showWelcomeMessage();
+        System.out.println(ui.getWelcomeMessage());
+
     }
 
 
@@ -45,6 +49,7 @@ public class Hokmah {
      */
     public void run() {
         messageHandler();
+
     }
 
     /**
@@ -54,18 +59,27 @@ public class Hokmah {
         while (true) {
 
             String input = scanner.nextLine();
-            ui.showLine();
+
+            System.out.println(ui.getMessageSeparatorLine());
             try {
                 inputHandler.process(input);
             } catch (HokmahException e) {
                 System.out.println(e.getMessage());
             }
-            ui.showLine();
+            System.out.println(ui.getMessageSeparatorLine());
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            return inputHandler.process(input);
+        } catch (HokmahException e) {
+            return e.getMessage();
         }
     }
 
     public static void main(String[] args) {
-        new Hokmah("data/tasks.txt").run();
+        new Hokmah(DEFAULT_FILE_DATA_LOCATION).run();
     }
 
 }
