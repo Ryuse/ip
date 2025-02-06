@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final Hokmah hokmah = new Hokmah(Hokmah.DEFAULT_FILE_DATA_LOCATION);
+    private final Hokmah hokmah = new Hokmah();
 
     @Override
     public void start(Stage stage) {

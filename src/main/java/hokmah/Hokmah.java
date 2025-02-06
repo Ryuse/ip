@@ -30,10 +30,14 @@ public class Hokmah {
      *
      * @param filePath Path for task data storage
      */
-    public Hokmah(String filePath) {
+    public Hokmah(String ... filePath) {
+        if(filePath.length < 1){
+           filePath = new String[]{DEFAULT_FILE_DATA_LOCATION};
+        }
+
         tasks = new TaskList();
         ui = new MessageHandler();
-        storage = new SaveHandler(filePath);
+        storage = new SaveHandler(filePath[0]);
         tasks.setTaskArrayList(storage.loadFromFile());
 
         commandHandler = new CommandHandler(tasks, storage, ui);
