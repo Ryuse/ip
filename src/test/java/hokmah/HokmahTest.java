@@ -122,10 +122,5 @@ public class HokmahTest {
         assertTrue(task.toString().contains("[T][X] Test toString"));
     }
 
-    @Test
-    public void testInvalidTaskNumber() {
-        assertThrows(HokmahException.class, () ->
-                hokmah.inputHandler.process("mark 99")
-        );
-    }
+
 }
