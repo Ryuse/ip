@@ -1,6 +1,10 @@
 package view;
 
 
+import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import hokmah.Hokmah;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -52,8 +56,13 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
 
-        if (input.equals("bye")) {
-            System.exit(0);
+        if (Arrays.asList(hokmah.EXIT_COMMANDS).contains(input)) {
+            new Timer().schedule(new TimerTask() {
+                public void run() {
+                    System.exit(0);
+                }
+            }, 1000);
+
         }
     }
 }

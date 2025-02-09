@@ -30,6 +30,9 @@ public class Main extends Application {
             stage.setMinHeight(220);
             stage.setMinWidth(900);
 
+            assert stage.getMinHeight() == 220;
+            assert stage.getMinWidth() == 900;
+
             fxmlLoader.<MainWindow>getController().setHokmah(hokmah);
 
             stage.show();
