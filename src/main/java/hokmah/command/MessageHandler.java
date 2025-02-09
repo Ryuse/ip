@@ -5,6 +5,7 @@ import static hokmah.Hokmah.DATE_TIME_FORMAT;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import hokmah.task.Task;
 
@@ -133,16 +134,19 @@ public class MessageHandler {
      * @return Formatted results message or 'no matches' message
      */
     public String getFindMessage(ArrayList<Task> matches, String keyword) {
-        //Printing
         if (matches.isEmpty()) {
             return "No tasks found containing: " + keyword;
-        } else {
-            StringBuilder message = new StringBuilder("Here are the matching tasks in your list:\n");
-            for (int i = 0; i < matches.size(); i++) {
-                message.append((i + 1)).append(".").append(matches.get(i));
-            }
-            return message.toString();
         }
+
+        StringBuilder message = new StringBuilder("Here are the matching tasks in your list:\n");
+        
+        String matchesString = matches.stream()
+                .map(task -> (matches.indexOf(task) + 1) + "." + task)
+                .collect(Collectors.joining("\n"));
+
+        message.append(matchesString);
+        return message.toString();
+
     }
 
     /**
@@ -158,16 +162,19 @@ public class MessageHandler {
 
         message.append("Upcoming tasks on ")
                 .append(dateToCheck.format(DateTimeFormatter.ofPattern(Task.DATE_STRING_OUTPUT_FORMAT)))
-                .append(":");
+                .append(":\n\n");
 
-        for (Task task : upcomingTasks) {
-            message.append(task);
-        }
 
         if (upcomingTasks.isEmpty()) {
             message.append("You have no upcoming tasks dummy.");
         } else {
-            message.append("You have ")
+            String upcomingTasksString = upcomingTasks.stream()
+                                        .map(Task::toString)
+                                        .collect(Collectors.joining("\n"));
+
+            message.append(upcomingTasksString)
+                    .append("\n\n")
+                    .append("You have ")
                     .append(upcomingTasks.size())
                     .append(" upcoming tasks. It's coming soon. Like your doom.");
         }
