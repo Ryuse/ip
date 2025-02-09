@@ -18,6 +18,8 @@ public class Hokmah {
     public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
     public static final String DEFAULT_FILE_DATA_LOCATION = "data/tasks.txt";
 
+    public static final String[] EXIT_COMMANDS = {"bye", "exit", "quit", "cya"};
+
     private static final Scanner scanner = new Scanner(System.in);
     protected TaskList tasks;
     protected MessageHandler ui;
