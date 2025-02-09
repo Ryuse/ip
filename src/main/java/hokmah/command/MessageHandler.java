@@ -25,7 +25,7 @@ public class MessageHandler {
     /**
      * Gives a decorative separator line.
      *
-     * @return
+     * @return String representation of a separator line.
      */
     public String getMessageSeparatorLine() {
         return "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";
@@ -37,6 +37,8 @@ public class MessageHandler {
      * @param task The task that was marked as done
      */
     public String getMarkTaskMessage(Task task) {
+        assert task != null : "Null task in mark message";
+
         String message = "Bleh! I've masked this task as done!\n"
                 + task
                 + "\nAre you happy?";
@@ -50,6 +52,8 @@ public class MessageHandler {
      * @param task The task that was unmarked
      */
     public String getUnmarkTaskMessage(Task task) {
+        assert task != null : "Null task in Unmark message";
+
         String message = "So you have not done this task yet?"
                 + "\n" + task
                 + "\n" + "That's sad. I've masked it as such.";
@@ -64,6 +68,8 @@ public class MessageHandler {
      * @return Formatted deletion confirmation message
      */
     public String getDeleteTaskMessage(Task task) {
+        assert task != null : "Null task in delete message";
+
         String message = "I've removed this task:\n"
                 + task
                 + "What else do you want?";
@@ -133,7 +139,9 @@ public class MessageHandler {
      * @return Formatted results message or 'no matches' message
      */
     public String getFindMessage(ArrayList<Task> matches, String keyword) {
-        //Printing
+        assert keyword != null : "Null search keyword";
+        assert matches != null : "Null matches list";
+
         if (matches.isEmpty()) {
             return "No tasks found containing: " + keyword;
         } else {
@@ -153,6 +161,8 @@ public class MessageHandler {
      * @return Formatted list of upcoming tasks or empty state message
      */
     public String getUpcomingTasksOnMessage(ArrayList<Task> upcomingTasks, LocalDateTime dateToCheck) {
+        assert dateToCheck != null : "Null date in upcoming tasks";
+
         StringBuilder message = new StringBuilder();
 
 
