@@ -167,6 +167,7 @@ public class CommandHandler {
      * @return Confirmation message with new task details
      * @throws HokmahException If the format is invalid or datetime parsing fails
      */
+    protected String addDeadline(String[] inputArray) throws HokmahException {
         assert inputArray != null : "Null command input";
 
         if (inputArray.length == 1) {
