@@ -34,6 +34,8 @@ public class MessageHandler {
      * @param task The task that was marked as done
      */
     public String getMarkTaskMessage(Task task) {
+        assert task != null : "Null task in Mark message";
+
         String message = String.format("""
                 Bleh! I've masked this task as done!
                 %s
@@ -49,6 +51,8 @@ public class MessageHandler {
      * @param task The task that was unmarked
      */
     public String getUnmarkTaskMessage(Task task) {
+        assert task != null : "Null task in Unmark message";
+
         String message = String.format("""
                 So you have not done this task yet?
                 %s
@@ -65,6 +69,8 @@ public class MessageHandler {
      * @return Formatted deletion confirmation message
      */
     public String getDeleteTaskMessage(Task task) {
+        assert task != null : "Null task in Delete message";
+
         String message = String.format("""
                 Ok sure, I've removed this task
                 %s
@@ -82,6 +88,8 @@ public class MessageHandler {
      * @return message
      */
     public String getAddTaskMessage(Task task, int taskCount) {
+        assert task != null : "Null task in AddTask message";
+
         String message = String.format("""
                 Ok sure, I've added this task:
                 %s
@@ -160,7 +168,9 @@ public class MessageHandler {
      * @return Formatted results message or 'no matches' message
      */
     public String getFindMessage(ArrayList<Task> matches, String keyword) {
-        //Printing
+        assert keyword != null : "Null search keyword";
+        assert matches != null : "Null matches list";
+
         if (matches.isEmpty()) {
             return "No tasks found containing: " + keyword;
         }
@@ -184,6 +194,8 @@ public class MessageHandler {
      * @return Formatted list of upcoming tasks or empty state message
      */
     public String getUpcomingTasksOnMessage(ArrayList<Task> upcomingTasks, LocalDateTime dateToCheck) {
+        assert dateToCheck != null : "Null date in upcoming tasks";
+
         StringBuilder message = new StringBuilder();
 
         String formattedDate = dateToCheck.format(DateTimeFormatter.ofPattern(Task.DATE_STRING_OUTPUT_FORMAT));
