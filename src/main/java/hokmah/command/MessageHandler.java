@@ -6,6 +6,7 @@ import static hokmah.Hokmah.LOGO;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import hokmah.task.Task;
 
@@ -33,6 +34,8 @@ public class MessageHandler {
      * @param task The task that was marked as done
      */
     public String getMarkTaskMessage(Task task) {
+        assert task != null : "Null task in Mark message";
+
         String message = String.format("""
                 Bleh! I've masked this task as done!
                 %s
@@ -48,6 +51,8 @@ public class MessageHandler {
      * @param task The task that was unmarked
      */
     public String getUnmarkTaskMessage(Task task) {
+        assert task != null : "Null task in Unmark message";
+
         String message = String.format("""
                 So you have not done this task yet?
                 %s
@@ -64,6 +69,8 @@ public class MessageHandler {
      * @return Formatted deletion confirmation message
      */
     public String getDeleteTaskMessage(Task task) {
+        assert task != null : "Null task in Delete message";
+
         String message = String.format("""
                 Ok sure, I've removed this task
                 %s
@@ -81,6 +88,8 @@ public class MessageHandler {
      * @return message
      */
     public String getAddTaskMessage(Task task, int taskCount) {
+        assert task != null : "Null task in AddTask message";
+
         String message = String.format("""
                 Ok sure, I've added this task:
                 %s
@@ -159,15 +168,20 @@ public class MessageHandler {
      * @return Formatted results message or 'no matches' message
      */
     public String getFindMessage(ArrayList<Task> matches, String keyword) {
+        assert keyword != null : "Null search keyword";
+        assert matches != null : "Null matches list";
+
         if (matches.isEmpty()) {
             return "No tasks found containing: " + keyword;
         }
 
         StringBuilder message = new StringBuilder("Here are the matching tasks in your list:\n");
-        for (int i = 0; i < matches.size(); i++) {
-            message.append((i + 1)).append(".").append(matches.get(i));
-        }
 
+        String matchesString = matches.stream()
+                .map(task -> (matches.indexOf(task) + 1) + "." + task)
+                .collect(Collectors.joining("\n"));
+
+        message.append(matchesString);
         return message.toString();
 
     }
@@ -180,6 +194,8 @@ public class MessageHandler {
      * @return Formatted list of upcoming tasks or empty state message
      */
     public String getUpcomingTasksOnMessage(ArrayList<Task> upcomingTasks, LocalDateTime dateToCheck) {
+        assert dateToCheck != null : "Null date in upcoming tasks";
+
         StringBuilder message = new StringBuilder();
 
         String formattedDate = dateToCheck.format(DateTimeFormatter.ofPattern(Task.DATE_STRING_OUTPUT_FORMAT));
@@ -187,14 +203,17 @@ public class MessageHandler {
                 .append(formattedDate)
                 .append(":");
 
-        for (Task task : upcomingTasks) {
-            message.append(task);
-        }
 
         if (upcomingTasks.isEmpty()) {
             message.append("You have no upcoming tasks dummy.");
         } else {
-            message.append("You have ")
+            String upcomingTasksString = upcomingTasks.stream()
+                                        .map(Task::toString)
+                                        .collect(Collectors.joining("\n"));
+
+            message.append(upcomingTasksString)
+                    .append("\n\n")
+                    .append("You have ")
                     .append(upcomingTasks.size())
                     .append("upcoming tasks. It's coming soon. Like your doom.");
         }

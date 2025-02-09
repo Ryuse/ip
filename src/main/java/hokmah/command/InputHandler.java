@@ -39,7 +39,7 @@ public class InputHandler {
         String command = inputArray[0];
 
         boolean isExitCommand = Arrays.asList(EXIT_COMMANDS).contains(command);
-        if(isExitCommand){
+        if (isExitCommand) {
             return commandHandler.exit();
         }
 
