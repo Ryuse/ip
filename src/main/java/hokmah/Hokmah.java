@@ -26,6 +26,8 @@ public class Hokmah {
                 """;
 
 
+    public static final String[] EXIT_COMMANDS = {"bye", "exit", "quit", "cya"};
+
     private static final Scanner scanner = new Scanner(System.in);
     protected TaskList tasks;
     protected MessageHandler ui;
