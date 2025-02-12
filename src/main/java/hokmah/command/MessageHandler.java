@@ -1,6 +1,5 @@
 package hokmah.command;
 
-import static hokmah.Hokmah.DATE_TIME_FORMAT;
 import static hokmah.Hokmah.LOGO;
 
 import java.time.LocalDateTime;

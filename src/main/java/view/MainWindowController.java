@@ -43,7 +43,7 @@ public class MainWindowController extends AnchorPane {
     }
 
     public void setHelpWindowController(HelpWindowController h) {
-            this.helpWindowController = h;
+        this.helpWindowController = h;
     }
 
     /**
@@ -69,7 +69,7 @@ public class MainWindowController extends AnchorPane {
             }, 1000);
         }
 
-        if(input.equals("help")) {
+        if (input.equals("help")) {
             if (helpWindowController.isShown()) {
                 dialogContainer.getChildren().add(
                         DialogBoxController.getDukeDialog("""

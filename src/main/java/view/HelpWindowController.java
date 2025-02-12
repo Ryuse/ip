@@ -20,6 +20,8 @@ import javafx.stage.Stage;
  * Controller for the Help GUI.
  */
 public class HelpWindowController extends AnchorPane {
+    private static boolean isShown = false;
+
     @FXML
     private Text helpLabel;
 
@@ -30,13 +32,15 @@ public class HelpWindowController extends AnchorPane {
     private Button exitButton;
 
 
-    private static boolean isShown = false;
-
     public static boolean isShown() {
         return isShown;
     }
 
 
+    /**
+     * initializes the HelpWindow with respective help texts.
+     *
+     */
     @FXML
     public void initialize() {
         helpLabel.setText("Here's what I can do. You better be grateful.");
@@ -44,8 +48,11 @@ public class HelpWindowController extends AnchorPane {
         String[][] helpTexts = {
                 {"list", "Shows all the tasks in the list"},
                 {"todo [name]", "Adds a todo task to the task list"},
-                {"deadline [name] /by [" + DATE_TIME_FORMAT + "]", "Adds a deadline task to the task list"},
-                {"event [name] /from [" + DATE_TIME_FORMAT + "] /to [" + DATE_TIME_FORMAT + "]", "Adds an event task to the task list"},
+                {"deadline [name] /by ["
+                        + DATE_TIME_FORMAT + "]", "Adds a deadline task to the task list"},
+                {"event [name] /from ["
+                        + DATE_TIME_FORMAT + "] /to ["
+                        + DATE_TIME_FORMAT + "]", "Adds an event task to the task list"},
                 {"mark [task number]", "Marks the task at [task number] in the task list as completed"},
                 {"unmark [task number]", "Marks the task at [task number] in the task list as incomplete"},
                 {"delete [task number]", "Deletes the task at [task number] in the task list"},
@@ -69,6 +76,10 @@ public class HelpWindowController extends AnchorPane {
         }
     }
 
+    /**
+     * Closes the help window.
+     *
+     */
     @FXML
     private void handleExitButtonAction() {
         Stage stage = (Stage) exitButton.getScene().getWindow();
@@ -77,6 +88,11 @@ public class HelpWindowController extends AnchorPane {
 
     }
 
+    /**
+     * Shows the help window.
+     *
+     * @throws IOException if the fxml file for help window cannot be found.
+     */
     public static void showHelpWindow() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/HelpWindow.fxml"));
