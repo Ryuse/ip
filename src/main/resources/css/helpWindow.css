@@ -1,0 +1,42 @@
+/* General window styling */
+.root {
+    -fx-background-color: #f5f5f5;
+    -fx-padding: 10px;
+}
+
+
+.grid-pane {
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
+
+/* Command Labels */
+.text-table-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #3c3c3c;
+    -fx-padding: 2px;
+}
+
+.label.text-table-row {
+    -fx-text-fill: #3c3c3c;
+    -fx-padding: 5px;
+}
+.text-label {
+    -fx-font-size: 20px;
+    -fx-text-fill: #444;
+}
+
+/* Exit Button Styling */
+.button {
+    -fx-background-color: #555555;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 15px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #959595;
+}

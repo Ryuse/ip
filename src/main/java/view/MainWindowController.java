@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 /**
  * Controller for the main GUI.
  */
-public class MainWindow extends AnchorPane {
+public class MainWindowController extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -28,6 +28,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Hokmah hokmah;
+    private HelpWindowController helpWindowController;
 
     @FXML
     public void initialize() {
@@ -41,6 +42,10 @@ public class MainWindow extends AnchorPane {
         this.hokmah = h;
     }
 
+    public void setHelpWindowController(HelpWindowController h) {
+        this.helpWindowController = h;
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -50,8 +55,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = hokmah.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input),
-                DialogBox.getDukeDialog(response)
+                DialogBoxController.getUserDialog(input),
+                DialogBoxController.getDukeDialog(response)
         );
         userInput.clear();
 
@@ -62,7 +67,19 @@ public class MainWindow extends AnchorPane {
                     System.exit(0);
                 }
             }, 1000);
+        }
 
+        if (input.equals("help")) {
+            if (helpWindowController.isShown()) {
+                dialogContainer.getChildren().add(
+                        DialogBoxController.getDukeDialog("""
+                                Wait... You already have the help window open!
+                                Go look for it!""")
+                );
+                return;
+            }
+
+            helpWindowController.showHelpWindow();
         }
     }
 }

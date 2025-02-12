@@ -1,6 +1,5 @@
 package hokmah.command;
 
-import static hokmah.Hokmah.DATE_TIME_FORMAT;
 import static hokmah.Hokmah.LOGO;
 
 import java.time.LocalDateTime;
@@ -124,40 +123,9 @@ public class MessageHandler {
      * @return
      */
     public String getHelpMessage() {
-        StringBuilder commandList = new StringBuilder();
-        commandList.append("You seriously need help? Fine. Here is what I can do:\n")
-                .append("list\n")
-                .append("\t(Shows all the tasks in the list)\n")
+        String message = "You seriously need help? Fine. I'll show you what I can do.";
 
-                .append("todo [name]\n")
-                .append("\t(Adds a todo task to the task list)\n")
-
-                .append("deadline [name] /by [" + DATE_TIME_FORMAT + "]\n")
-                .append("\t(Adds a deadline task to the task list)\n")
-
-                .append("event [name] /from [" + DATE_TIME_FORMAT + "] /to [" + DATE_TIME_FORMAT + "]\n")
-                .append("\t(Adds a event task to the task list)\n")
-
-                .append("mark [task number]\n")
-                .append("\t(Marks the task at [task number] in the task list as completed)\n")
-
-                .append("unmark [task number]\n")
-                .append("\t(Marks the task at [task number] in the task list as incomplete)\n")
-
-                .append("delete [task number]\n")
-                .append("\t(Deletes the task at [task number] in the task list)\n")
-
-                .append("upcoming /on [" + DATE_TIME_FORMAT + "]\n")
-                .append("\t(Shows all the tasks that are happening on the given date)\n")
-
-                .append("find [keyword]\n")
-                .append("\t(Finds tasks containing the specified keyword)\n")
-
-                .append("bye\n")
-                .append("\t(Only if you want to leave. It's not like I wanted you to be here.)");
-
-        return commandList.toString();
-
+        return message;
     }
 
     /**

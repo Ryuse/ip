@@ -17,15 +17,15 @@ import javafx.scene.layout.HBox;
  * Represents a dialog box consisting of an ImageView to represent the speaker's face
  * and a label containing text from the speaker.
  */
-public class DialogBox extends HBox {
+public class DialogBoxController extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text) {
+    private DialogBoxController(String text) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindowController.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -47,12 +47,12 @@ public class DialogBox extends HBox {
         dialog.getStyleClass().add("reply-label");
     }
 
-    public static DialogBox getUserDialog(String text) {
-        return new DialogBox(text);
+    public static DialogBoxController getUserDialog(String text) {
+        return new DialogBoxController(text);
     }
 
-    public static DialogBox getDukeDialog(String text) {
-        var db = new DialogBox(text);
+    public static DialogBoxController getDukeDialog(String text) {
+        var db = new DialogBoxController(text);
         db.flip();
         return db;
     }
