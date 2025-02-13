@@ -1,6 +1,8 @@
 package hokmah.data;
 
 
+import static hokmah.exception.HokmahException.ExceptionType.NO_SAVE_FILE;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import hokmah.Hokmah;
+import hokmah.exception.HokmahException;
 import hokmah.task.Deadline;
 import hokmah.task.Event;
 import hokmah.task.Task;
@@ -43,7 +46,6 @@ public class SaveHandler {
         File file = new File(path);
         try {
             file.getParentFile().mkdirs();
-
             file.createNewFile();
             FileWriter writer = new FileWriter(file);
 
@@ -75,69 +77,43 @@ public class SaveHandler {
      * @param path Custom load location
      * @return List of loaded tasks
      */
-    public ArrayList<Task> loadFromFile(String path) {
+    public ArrayList<Task> loadFromFile(String path) throws HokmahException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         File file = new File(path);
 
+        Scanner scanner;
         try {
             file.getParentFile().mkdirs();
             file.createNewFile();
 
-            Scanner scanner = new Scanner(file);
+            scanner = new Scanner(file);
             scanner.useDelimiter("\n");
-
-            while (scanner.hasNext()) {
-                String[] taskInfo = scanner.next().split("\\|");
-                String taskType = taskInfo[0];
-                String taskName = taskInfo[2];
-
-                Task task = null;
-
-                switch (taskType) {
-                case "T":
-                    task = new ToDo(taskName);
-                    break;
-                case "D":
-                    try {
-                        System.out.println(taskInfo[3]);
-                        LocalDateTime DeadlineEndTime = LocalDateTime.parse(taskInfo[3],
-                                DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
-                        task = new Deadline(taskName, DeadlineEndTime);
-
-                    } catch (DateTimeParseException e) {
-                        System.out.println(taskName + " is not a valid date time format");
-                    }
-
-                    break;
-                case "E":
-                    try {
-                        LocalDateTime EventStartTime = LocalDateTime.parse(taskInfo[3],
-                                DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
-                        LocalDateTime eventEndTime = LocalDateTime.parse(taskInfo[4],
-                                DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
-                        task = new Event(taskName, EventStartTime, eventEndTime);
-                    } catch (DateTimeParseException e) {
-                        System.out.println(taskName + " is not a valid date time format");
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid task type");
-                }
-
-                if (task == null) {
-                    continue;
-                }
-
-                if (taskInfo[1].equals("1")) {
-                    task.markDone();
-                }
-
-                tasks.add(task);
-            }
-            scanner.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new HokmahException(NO_SAVE_FILE);
         }
+
+        while (scanner.hasNext()) {
+            String[] taskInfo = scanner.next().split("\\|");
+            String taskType = taskInfo[0];
+
+            Task task = null;
+
+            switch (taskType) {
+            case "T" -> task = loadTodoSave(taskInfo);
+            case "D" -> task = loadDeadlineSave(taskInfo);
+            case "E" -> task = loadEventSave(taskInfo);
+            default -> System.out.println("Invalid task type");
+            }
+
+            if (task == null) {
+                continue;
+            }
+
+            tasks.add(task);
+        }
+
+        scanner.close();
+
         return tasks;
     }
 
@@ -146,7 +122,79 @@ public class SaveHandler {
      *
      * @return List of loaded tasks
      */
-    public ArrayList<Task> loadFromFile() {
+    public ArrayList<Task> loadFromFile() throws HokmahException {
         return loadFromFile(filePath);
     }
+
+    /**
+     * Loads a Todo task from save text.
+     *
+     * @param taskInfo - String array containing information about the task
+     * @return Task object of the loaded Todo task
+     */
+    private Task loadTodoSave(String[] taskInfo) {
+        String taskName = taskInfo[2];
+        ToDo task = new ToDo(taskName);
+
+        if (taskInfo[1].equals("1")) {
+            task.markDone();
+        }
+
+        return task;
+    }
+
+    /**
+     * Loads a Deadline task from save text.
+     *
+     * @param taskInfo - String array containing information about the task
+     * @return Task object of the loaded Deadline task
+     */
+    private Task loadDeadlineSave(String[] taskInfo) {
+        String taskName = taskInfo[2];
+        Deadline task = null;
+
+        try {
+            LocalDateTime DeadlineEndTime = LocalDateTime.parse(taskInfo[3],
+                    DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+            task = new Deadline(taskName, DeadlineEndTime);
+
+            if (taskInfo[1].equals("1")) {
+                task.markDone();
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println(taskName + " is not a valid date time format");
+        }
+
+        return task;
+    }
+
+    /**
+     * Loads an Event task from save text.
+     *
+     * @param taskInfo - String array containing information about the task
+     * @return Task object of the loaded Event task
+     */
+    private Task loadEventSave(String[] taskInfo) {
+        String taskName = taskInfo[2];
+        Event task = null;
+
+        try {
+            LocalDateTime EventStartTime = LocalDateTime.parse(taskInfo[3],
+                    DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+            LocalDateTime eventEndTime = LocalDateTime.parse(taskInfo[4],
+                    DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+            task = new Event(taskName, EventStartTime, eventEndTime);
+
+            if (taskInfo[1].equals("1")) {
+                task.markDone();
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println(taskName + " is not a valid date time format");
+        }
+
+        return task;
+    }
+
+
+
 }

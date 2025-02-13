@@ -18,12 +18,12 @@ public class Hokmah {
     public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
     public static final String DEFAULT_FILE_DATA_LOCATION = "data/tasks.txt";
     public static final String LOGO = """
-                ,--.  ,--.         ,--.                         ,--.
-                |  '--'  |  ,---.  |  |,-.  ,--,--,--.  ,--,--. |  ,---.
-                |  .--.  | | .-. | |     /  |        | ' ,-.  | |  .-.  |
-                |  |  |  | ' '-' ' |  \\  \\  |  |  |  | \\ '-'  | |  | |  |
-                `--'  `--'  `---'  `--'`--' `--`--`--'  `--`--' `--' `--'
-                """;
+            ,--.  ,--.         ,--.                         ,--.
+            |  '--'  |  ,---.  |  |,-.  ,--,--,--.  ,--,--. |  ,---.
+            |  .--.  | | .-. | |     /  |        | ' ,-.  | |  .-.  |
+            |  |  |  | ' '-' ' |  \\  \\  |  |  |  | \\ '-'  | |  | |  |
+            `--'  `--'  `---'  `--'`--' `--`--`--'  `--`--' `--' `--'
+            """;
 
 
     public static final String[] EXIT_COMMANDS = {"bye", "exit", "quit", "cya"};
@@ -40,7 +40,7 @@ public class Hokmah {
      *
      * @param filePath Path for task data storage
      */
-    public Hokmah(String ... filePath) {
+    public Hokmah(String... filePath) {
         if (filePath.length < 1) {
             filePath = new String[]{DEFAULT_FILE_DATA_LOCATION};
         }
@@ -48,7 +48,13 @@ public class Hokmah {
         tasks = new TaskList();
         ui = new MessageHandler();
         storage = new SaveHandler(filePath[0]);
-        tasks.setTaskArrayList(storage.loadFromFile());
+
+        try {
+            tasks.setTaskArrayList(storage.loadFromFile());
+        } catch (HokmahException e) {
+            System.out.println(e.getMessage());
+        }
+
 
         commandHandler = new CommandHandler(tasks, storage, ui);
         inputHandler = new InputHandler(commandHandler);

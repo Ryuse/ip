@@ -43,6 +43,10 @@ public class CommandHandler {
      * @return String containing numbered list of tasks
      */
     protected String showList() {
+        if (tasks.size() == 0) {
+            return "You have no tasks! Don't disturb me!";
+        }
+
         StringBuilder message = new StringBuilder("You have these tasks:\n");
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.getTaskArrayList().get(i);
