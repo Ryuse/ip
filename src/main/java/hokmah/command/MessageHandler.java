@@ -32,7 +32,7 @@ public class MessageHandler {
      *
      * @param task The task that was marked as done
      */
-    public String getMarkTaskMessage(Task task) {
+    public String[] getMarkTaskMessage(Task task) {
         assert task != null : "Null task in Mark message";
 
         String message = String.format("""
@@ -41,7 +41,9 @@ public class MessageHandler {
                 Are you happy?""",
                 task);
 
-        return message;
+        String[] messageLines = message.split("\n");
+
+        return messageLines;
     }
 
     /**
@@ -49,7 +51,7 @@ public class MessageHandler {
      *
      * @param task The task that was unmarked
      */
-    public String getUnmarkTaskMessage(Task task) {
+    public String[] getUnmarkTaskMessage(Task task) {
         assert task != null : "Null task in Unmark message";
 
         String message = String.format("""
@@ -58,7 +60,9 @@ public class MessageHandler {
                 That's sad. I've masked it as such.""",
                 task);
 
-        return message;
+        String[] messageLines = message.split("\n");
+
+        return messageLines;
     }
 
     /**
@@ -67,7 +71,7 @@ public class MessageHandler {
      * @param task The task that was removed
      * @return Formatted deletion confirmation message
      */
-    public String getDeleteTaskMessage(Task task) {
+    public String[] getDeleteTaskMessage(Task task) {
         assert task != null : "Null task in Delete message";
 
         String message = String.format("""
@@ -76,7 +80,9 @@ public class MessageHandler {
                 What else do you want?""",
                 task);
 
-        return message;
+        String[] messageLines = message.split("\n");
+
+        return messageLines;
     }
 
     /**
@@ -86,7 +92,7 @@ public class MessageHandler {
      * @param taskCount The new total number of tasks
      * @return message
      */
-    public String getAddTaskMessage(Task task, int taskCount) {
+    public String[] getAddTaskMessage(Task task, int taskCount) {
         assert task != null : "Null task in AddTask message";
 
         String message = String.format("""
@@ -96,7 +102,9 @@ public class MessageHandler {
                 task,
                 taskCount);
 
-        return message;
+        String[] messageLines = message.split("\n");
+
+        return messageLines;
     }
 
     /**
@@ -105,16 +113,15 @@ public class MessageHandler {
      *
      * @return
      */
-    public String getUnsupportedCommandMessage() {
+    public String[] getUnsupportedCommandMessage() {
         String message = """
-                That's not right
-
-                Just what are you trying to do?
+                No! That's not right. Just what are you trying to do?
                 Can you ask something else?
-
                 If you don't know what to ask you can use the 'help' command""";
 
-        return message;
+        String[] messageLines = message.split("\n");
+
+        return messageLines;
     }
 
     /**
@@ -122,10 +129,14 @@ public class MessageHandler {
      *
      * @return
      */
-    public String getHelpMessage() {
-        String message = "You seriously need help? Fine. I'll show you what I can do.";
+    public String[] getHelpMessage() {
+        String message = """
+                You seriously need help? Fine.
+                I'll show you what I can do.""";
 
-        return message;
+        String[] messageLines = message.split("\n");
+
+        return messageLines;
     }
 
     /**
@@ -135,22 +146,25 @@ public class MessageHandler {
      * @param keyword Search term used
      * @return Formatted results message or 'no matches' message
      */
-    public String getFindMessage(ArrayList<Task> matches, String keyword) {
+    public String[] getFindMessage(ArrayList<Task> matches, String keyword) {
         assert keyword != null : "Null search keyword";
         assert matches != null : "Null matches list";
 
         if (matches.isEmpty()) {
-            return "No tasks found containing: " + keyword;
+            return new String[]{"No tasks found containing: " + keyword};
         }
 
-        StringBuilder message = new StringBuilder("Here are the matching tasks in your list:\n");
+        StringBuilder message = new StringBuilder("Here are the matching tasks in your list:\n\n");
 
         String matchesString = matches.stream()
                 .map(task -> (matches.indexOf(task) + 1) + "." + task)
                 .collect(Collectors.joining("\n"));
 
         message.append(matchesString);
-        return message.toString();
+
+        String[] messageLines = new String[]{message.toString()};
+
+        return messageLines;
 
     }
 
@@ -161,20 +175,22 @@ public class MessageHandler {
      * @param dateToCheck   Date being checked for upcoming tasks
      * @return Formatted list of upcoming tasks or empty state message
      */
-    public String getUpcomingTasksOnMessage(ArrayList<Task> upcomingTasks, LocalDateTime dateToCheck) {
+    public String[] getUpcomingTasksOnMessage(ArrayList<Task> upcomingTasks, LocalDateTime dateToCheck) {
         assert dateToCheck != null : "Null date in upcoming tasks";
 
         StringBuilder message = new StringBuilder();
 
         String formattedDate = dateToCheck.format(DateTimeFormatter.ofPattern(Task.DATE_STRING_OUTPUT_FORMAT));
-        message.append("Upcoming tasks on ")
-                .append(formattedDate)
-                .append(":");
+
 
 
         if (upcomingTasks.isEmpty()) {
-            message.append("You have no upcoming tasks dummy.");
+            message.append(String.format("You have no upcoming tasks on %s, dummy.", formattedDate));
         } else {
+            message.append("Your upcoming tasks on ")
+                    .append(formattedDate)
+                    .append(" is:\n\n");
+
             String upcomingTasksString = upcomingTasks.stream()
                                         .map(Task::toString)
                                         .collect(Collectors.joining("\n"));
@@ -183,10 +199,12 @@ public class MessageHandler {
                     .append("\n\n")
                     .append("You have ")
                     .append(upcomingTasks.size())
-                    .append("upcoming tasks. It's coming soon. Like your doom.");
+                    .append(" upcoming task(s). It's coming soon. Like your doom.");
         }
 
-        return message.toString();
+        String[] messageLines = new String[]{message.toString()};
+
+        return messageLines;
     }
 
     /**
@@ -194,7 +212,7 @@ public class MessageHandler {
      *
      * @return
      */
-    public String getWelcomeMessage() {
+    public String[] getWelcomeMessage() {
         String message = String.format("""
                 I'm
                 %s
@@ -202,7 +220,9 @@ public class MessageHandler {
                 %s
                 """, LOGO, getMessageSeparatorLine());
 
-        return message;
+        String[] messageLines = message.split("\n");
+
+        return messageLines;
 
     }
 
@@ -211,15 +231,15 @@ public class MessageHandler {
      *
      * @return
      */
-    public String getExitMessage() {
+    public String[] getExitMessage() {
         String message = """
                 Goodbye!
-
                 I hope you don't come back soon!
-
                 ヾ(＾ ∇ ＾).""";
 
-        return message;
+        String[] messageLines = message.split("\n");
+
+        return messageLines;
     }
 
 

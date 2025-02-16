@@ -7,6 +7,7 @@ import hokmah.Hokmah;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -27,11 +28,12 @@ public class Main extends Application {
             stage.setScene(scene);
 
             stage.setTitle("Hokmah");
+            stage.getIcons().add(new Image("/images/icon.png"));
             stage.setMinHeight(220);
-            stage.setMinWidth(900);
+            stage.setMinWidth(700);
 
             assert stage.getMinHeight() == 220;
-            assert stage.getMinWidth() == 900;
+            assert stage.getMinWidth() == 700;
 
             fxmlLoader.<MainWindowController>getController().setHokmah(hokmah);
 

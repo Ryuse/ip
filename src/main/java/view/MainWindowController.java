@@ -53,15 +53,18 @@ public class MainWindowController extends AnchorPane {
     @FXML
     private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
-        String response = hokmah.getResponse(input);
+        String[] responses = hokmah.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBoxController.getUserDialog(input),
-                DialogBoxController.getDukeDialog(response)
+                DialogBoxController.getUserDialog(input)
         );
+
+        for (String response : responses) {
+            dialogContainer.getChildren().add(DialogBoxController.getHokmahDialog(response));
+        }
         userInput.clear();
 
 
-        if (Arrays.asList(hokmah.EXIT_COMMANDS).contains(input)) {
+        if (Arrays.asList(Hokmah.EXIT_COMMANDS).contains(input)) {
             new Timer().schedule(new TimerTask() {
                 public void run() {
                     System.exit(0);
@@ -72,7 +75,7 @@ public class MainWindowController extends AnchorPane {
         if (input.equals("help")) {
             if (helpWindowController.isShown()) {
                 dialogContainer.getChildren().add(
-                        DialogBoxController.getDukeDialog("""
+                        DialogBoxController.getHokmahDialog("""
                                 Wait... You already have the help window open!
                                 Go look for it!""")
                 );

@@ -1,9 +1,10 @@
 .label {
-    -fx-background-color: #e8e8e8;
+    -fx-background-color: #ffffff;
     -fx-border-color: #cdcdcd #cdcdcd #cdcdcd #cdcdcd;
     -fx-border-width: 2px;
     -fx-background-radius: 0.25em 0.25em 0 0.25em;
     -fx-border-radius: 0.25em 0.25em 0 0.25em;
+    -fx-effect: dropshadow(three-pass-box, rgba(225, 225, 225, 0.8), 10, 0, 0, 0);
 }
 
 .reply-label {

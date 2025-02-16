@@ -31,7 +31,7 @@ public class InputHandler {
      * @return Result message from command execution
      * @throws HokmahException For invalid commands or parameters
      */
-    public String process(String input) throws HokmahException {
+    public String[] process(String input) throws HokmahException {
         assert !input.isBlank() : "Empty input received";
         assert commandHandler != null : "Missing command handler";
 

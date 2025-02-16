@@ -51,7 +51,7 @@ public class DialogBoxController extends HBox {
         return new DialogBoxController(text);
     }
 
-    public static DialogBoxController getDukeDialog(String text) {
+    public static DialogBoxController getHokmahDialog(String text) {
         var db = new DialogBoxController(text);
         db.flip();
         return db;
