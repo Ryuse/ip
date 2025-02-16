@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -100,6 +101,7 @@ public class HelpWindowController extends AnchorPane {
             Stage helpStage = new Stage();
 
             helpStage.setTitle("Help");
+            helpStage.getIcons().add(new Image("/images/icon.png"));
             helpStage.setResizable(false);
             helpStage.setScene(new Scene(helpWindow));
 

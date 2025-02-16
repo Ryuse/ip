@@ -10,7 +10,7 @@
 <?import javafx.geometry.Insets?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            stylesheets="@../css/helpWindow.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            stylesheets="@../css/help-window.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="view.HelpWindowController">
 
     <VBox fx:id="helpContent" spacing="10"

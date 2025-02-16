@@ -1,26 +1,29 @@
 .root {
     main-color: rgb(243, 243, 243);       /* Create a looked-up color called "main-color" within root. */
     -fx-background-color: main-color;
+    -fx-background-image: url("../images/mainBg.png");
+    -fx-opacity: 0.75;
 }
 
 .text-field {
     -fx-background-color: #eaeaea;
-    -fx-font: 20px "Arial";
+    -fx-font: 15px "Arial";
     -fx-border-style: solid;
-    -fx-border-color: #cdcdcd;
+    -fx-border-color: #d9cdda;
     -fx-border-width: 0.1em 0em 0em 0em;
 
 }
 
 .button {
-    -fx-background-color: #676767;
-    -fx-font: italic bold 14px "Arial";
+    -fx-background-color: #e1bfe1;
+    -fx-font:  bold 14px "Arial";
+    -fx-text-fill: #8f749c;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
 
 .button:hover {
-    -fx-background-color: #b8b8b8;
+    -fx-background-color: #c1b4c0;
     -fx-font-size: 14px;
 }
 
