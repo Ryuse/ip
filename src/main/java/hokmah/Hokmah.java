@@ -89,11 +89,11 @@ public class Hokmah {
         }
     }
 
-    public String getResponse(String input) {
+    public String[] getResponse(String input) {
         try {
             return inputHandler.process(input);
         } catch (HokmahException e) {
-            return e.getMessage();
+            return e.getMessageLines();
         }
     }
 
