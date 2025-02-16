@@ -78,7 +78,6 @@ public class CommandHandler {
         if (index < 0 || index >= tasks.size()) {
             throw new HokmahException(ExceptionType.TASK_NOT_FOUND);
         }
-        assert index < 0 && index >= tasks.size() : "Task index out of bounds";
 
         return tasks.getTaskArrayList().get(index);
     }
