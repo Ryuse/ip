@@ -1,5 +1,7 @@
 package hokmah.task;
 
+import static hokmah.Hokmah.DATETIME_OUTPUT_FORMAT;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -51,7 +53,7 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString()
                 + " (by: "
-                + timeEnd.format(DateTimeFormatter.ofPattern(DATE_STRING_OUTPUT_FORMAT))
+                + timeEnd.format(DateTimeFormatter.ofPattern(DATETIME_OUTPUT_FORMAT))
                 + ")";
     }
 
@@ -63,6 +65,6 @@ public class Deadline extends Task {
     public String getSaveText() {
         return super.getSaveText()
                 + "|"
-                + timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+                + timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATETIME_INPUT_FORMAT));
     }
 }

@@ -1,6 +1,7 @@
 package hokmah.command;
 
-import static hokmah.Hokmah.LOGO;
+
+import static hokmah.Hokmah.DATETIME_OUTPUT_FORMAT;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -115,7 +116,7 @@ public class MessageHandler {
      */
     public String[] getUnsupportedCommandMessage() {
         String message = """
-                No! That's not right. Just what are you trying to do?
+                Ooookay? Just what are you trying to do?
                 Can you ask something else?
                 If you don't know what to ask you can use the 'help' command""";
 
@@ -180,7 +181,7 @@ public class MessageHandler {
 
         StringBuilder message = new StringBuilder();
 
-        String formattedDate = dateToCheck.format(DateTimeFormatter.ofPattern(Task.DATE_STRING_OUTPUT_FORMAT));
+        String formattedDate = dateToCheck.format(DateTimeFormatter.ofPattern(DATETIME_OUTPUT_FORMAT));
 
 
 
@@ -213,17 +214,13 @@ public class MessageHandler {
      * @return
      */
     public String[] getWelcomeMessage() {
-        String message = String.format("""
-                I'm
-                %s
+        String message = """
+                I'm Hokmah
                 What do you want?
-                %s
-                """, LOGO, getMessageSeparatorLine());
+                """;
 
         String[] messageLines = message.split("\n");
-
         return messageLines;
-
     }
 
     /**

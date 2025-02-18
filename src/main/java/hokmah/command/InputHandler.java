@@ -49,20 +49,11 @@ public class InputHandler {
         case "find":
             return commandHandler.findCommand(inputArray);
         case "mark":
-            assert inputArray.length == 2 : "Missing index for " + command;
-            int mark_id = Integer.parseInt(inputArray[1]);
-
-            return commandHandler.markTask(mark_id);
+            return commandHandler.markTask(inputArray);
         case "unmark":
-            assert inputArray.length == 2 : "Missing index for " + command;
-            int unmark_id = Integer.parseInt(inputArray[1]);
-
-            return commandHandler.unmarkTask(unmark_id);
+            return commandHandler.unmarkTask(inputArray);
         case "delete":
-            assert inputArray.length == 2 : "Missing index for " + command;
-            int delete_id = Integer.parseInt(inputArray[1]);
-
-            return commandHandler.deleteTask(delete_id);
+            return commandHandler.deleteTask(inputArray);
         case "todo":
             return commandHandler.addTodo(inputArray);
         case "deadline":

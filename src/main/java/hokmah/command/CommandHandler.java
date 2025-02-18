@@ -1,6 +1,6 @@
 package hokmah.command;
 
-import static hokmah.Hokmah.DATE_TIME_FORMAT;
+import static hokmah.Hokmah.DATETIME_INPUT_FORMAT;
 import static hokmah.exception.HokmahException.ExceptionType;
 
 import java.time.LocalDateTime;
@@ -24,6 +24,7 @@ public class CommandHandler {
     private final TaskList tasks;
     private final SaveHandler storage;
     private final MessageHandler messageHandler;
+
     /**
      * Initializes command handler with dependencies.
      *
@@ -40,7 +41,7 @@ public class CommandHandler {
     /**
      * Returns a formatted list of all tasks.
      *
-     * @return String containing numbered list of tasks
+     * @return String[] containing numbered list of tasks
      */
     protected String[] showList() {
         if (tasks.size() == 0) {
@@ -51,10 +52,6 @@ public class CommandHandler {
         StringBuilder tasksMessage = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.getTaskArrayList().get(i);
-
-            if (task == null) {
-                continue;
-            }
             assert task != null : "Task list contains null entries";
 
             tasksMessage.append((i + 1)).append(".").append(task).append("\n");
@@ -62,19 +59,27 @@ public class CommandHandler {
         }
 
         String[] messageLines = {"You have these tasks",
-                    tasksMessage.toString()};
+                tasksMessage.toString()};
+
         return messageLines;
     }
 
     /**
      * Retrieves task by ID.
      *
-     * @param id Task index (1-based)
+     * @param StringId Task index (1-based)
      * @return Requested Task object
      * @throws HokmahException For invalid task IDs
      */
-    protected Task getTask(int id) throws HokmahException {
-        int index = id - 1;
+    protected Task getTask(String StringId) throws HokmahException {
+        int index;
+        try {
+            int id = Integer.parseInt(StringId);
+            index = id - 1;
+        } catch (NumberFormatException e) {
+            throw new HokmahException(ExceptionType.TASK_NOT_FOUND);
+        }
+
         if (index < 0 || index >= tasks.size()) {
             throw new HokmahException(ExceptionType.TASK_NOT_FOUND);
         }
@@ -85,13 +90,18 @@ public class CommandHandler {
     /**
      * Marks the task at the specified index as done.
      *
-     * @param id 1-based index of the task to mark
+     * @param inputArray Parsed command components
      * @return Confirmation message with marked task details
      */
-    protected String[] markTask(int id) {
+    protected String[] markTask(String[] inputArray) throws HokmahException {
+        if (inputArray.length == 1) {
+            return new HokmahException(ExceptionType.NO_INDEX).getMessageLines();
+        }
+
         Task task;
+
         try {
-            task = getTask(id);
+            task = getTask(inputArray[1]);
         } catch (HokmahException e) {
             return e.getMessageLines();
         }
@@ -106,13 +116,18 @@ public class CommandHandler {
     /**
      * Removes the completion status from the specified task.
      *
-     * @param id 1-based index of the task to unmark
+     * @param inputArray Parsed command components
      * @return Confirmation message with unmarked task details
      */
-    protected String[] unmarkTask(int id) {
+    protected String[] unmarkTask(String[] inputArray) throws HokmahException {
+        if (inputArray.length == 1) {
+            return new HokmahException(ExceptionType.NO_INDEX).getMessageLines();
+        }
+
         Task task;
+
         try {
-            task = getTask(id);
+            task = getTask(inputArray[1]);
         } catch (HokmahException e) {
             return new String[]{e.getMessage()};
         }
@@ -126,13 +141,18 @@ public class CommandHandler {
     /**
      * Deletes a task from the list and persists changes.
      *
-     * @param id 1-based index of the task to delete
+     * @param inputArray Parsed command components
      * @return Confirmation message with deleted task details
      */
-    protected String[] deleteTask(int id) {
+    protected String[] deleteTask(String[] inputArray) throws HokmahException {
+
+        if (inputArray.length == 1) {
+            return new HokmahException(ExceptionType.NO_INDEX).getMessageLines();
+        }
+
         Task task;
         try {
-            task = getTask(id);
+            task = getTask(inputArray[1]);
         } catch (HokmahException e) {
             return new String[]{e.getMessage()};
         }
@@ -154,7 +174,7 @@ public class CommandHandler {
     protected String[] addTodo(String[] inputArray) throws HokmahException {
         assert inputArray != null : "Null command input";
 
-        if (inputArray.length == 1) {
+        if (inputArray.length == 1 || inputArray[1].trim().isEmpty()) {
             return new HokmahException(ExceptionType.NO_NAME).getMessageLines();
         }
         String taskName = inputArray[1];
@@ -180,11 +200,10 @@ public class CommandHandler {
         if (inputArray.length == 1) {
             HokmahException hokmahException = new HokmahException(ExceptionType.NO_NAME);
             return hokmahException.getMessageLines();
-
         }
         assert inputArray.length > 1;
 
-        String[] taskDetails = inputArray[1].split("/by");
+        String[] taskDetails = inputArray[1].split(" /by ");
         if (taskDetails.length == 1) {
             HokmahException hokmahException = new HokmahException(ExceptionType.DEADLINE_NO_TIME_END);
             return hokmahException.getMessageLines();
@@ -192,11 +211,17 @@ public class CommandHandler {
         assert taskDetails.length > 1;
 
         String taskName = taskDetails[0].trim();
+
+        if (taskName.isEmpty()) {
+            HokmahException hokmahException = new HokmahException(ExceptionType.NO_NAME);
+            return hokmahException.getMessageLines();
+        }
+
         String deadline = taskDetails[1].trim();
 
         LocalDateTime deadlineDate;
         try {
-            deadlineDate = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+            deadlineDate = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT));
         } catch (DateTimeParseException e) {
             HokmahException hokmahException = new HokmahException(ExceptionType.DEADLINE_NO_TIME_END);
             return hokmahException.getMessageLines();
@@ -224,14 +249,20 @@ public class CommandHandler {
             return hokmahException.getMessageLines();
         }
 
-        String[] taskDetails = inputArray[1].split("/from");
+        String[] taskDetails = inputArray[1].split(" /from ");
         if (taskDetails.length == 1) {
             HokmahException hokmahException = new HokmahException(ExceptionType.EVENT_NO_TIME_START);
             return hokmahException.getMessageLines();
         }
 
         String taskName = taskDetails[0].trim();
-        String[] eventTimeDetails = taskDetails[1].split("/to");
+
+        if (taskName.isEmpty()) {
+            HokmahException hokmahException = new HokmahException(ExceptionType.NO_NAME);
+            return hokmahException.getMessageLines();
+        }
+
+        String[] eventTimeDetails = taskDetails[1].split(" /to ");
         if (eventTimeDetails.length == 1) {
             HokmahException hokmahException = new HokmahException(ExceptionType.EVENT_NO_TIME_END);
             return hokmahException.getMessageLines();
@@ -245,8 +276,10 @@ public class CommandHandler {
         LocalDateTime eventEndTimeDate;
 
         try {
-            eventStartTimeDate = LocalDateTime.parse(eventStartTime, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
-            eventEndTimeDate = LocalDateTime.parse(eventEndTime, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+            eventStartTimeDate = LocalDateTime.parse(eventStartTime,
+                    DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT));
+            eventEndTimeDate = LocalDateTime.parse(eventEndTime,
+                    DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT));
         } catch (DateTimeParseException e) {
             HokmahException hokmahException = new HokmahException(ExceptionType.EVENT_NO_TIME_START);
             return hokmahException.getMessageLines();
@@ -321,7 +354,7 @@ public class CommandHandler {
             return hokmahException.getMessageLines();
         }
 
-        String[] taskDetails = inputArray[1].split("/on");
+        String[] taskDetails = inputArray[1].split(" /on ");
         if (taskDetails.length < 2) {
             HokmahException hokmahException = new HokmahException(ExceptionType.NO_UPCOMING_ON_DATE);
             return hokmahException.getMessageLines();
@@ -331,7 +364,7 @@ public class CommandHandler {
         LocalDateTime dateToCheck;
 
         try {
-            dateToCheck = LocalDateTime.parse(date, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+            dateToCheck = LocalDateTime.parse(date, DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT));
 
         } catch (DateTimeParseException e) {
             HokmahException hokmahException = new HokmahException(ExceptionType.NO_UPCOMING_ON_DATE);
@@ -349,7 +382,7 @@ public class CommandHandler {
                 continue;
             }
 
-            if (task.getTimeEnd().equals(dateToCheck)) {
+            if (!task.getTimeEnd().equals(dateToCheck)) {
                 continue;
             }
 

@@ -1,5 +1,7 @@
 package hokmah.task;
 
+import static hokmah.Hokmah.DATETIME_OUTPUT_FORMAT;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -63,9 +65,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString()
                 + " (from: "
-                + timeStart.format(DateTimeFormatter.ofPattern(DATE_STRING_OUTPUT_FORMAT))
+                + timeStart.format(DateTimeFormatter.ofPattern(DATETIME_OUTPUT_FORMAT))
                 + " to: "
-                + timeEnd.format(DateTimeFormatter.ofPattern(DATE_STRING_OUTPUT_FORMAT))
+                + timeEnd.format(DateTimeFormatter.ofPattern(DATETIME_OUTPUT_FORMAT))
                 + ")";
     }
 
@@ -76,9 +78,9 @@ public class Event extends Task {
      */
     public String getSaveText() {
         return super.getSaveText() + "|"
-                + timeStart.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT))
+                + timeStart.format(DateTimeFormatter.ofPattern(Hokmah.DATETIME_INPUT_FORMAT))
                 + "|"
-                + timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+                + timeEnd.format(DateTimeFormatter.ofPattern(Hokmah.DATETIME_INPUT_FORMAT));
     }
 
 }

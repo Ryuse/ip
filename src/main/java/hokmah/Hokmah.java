@@ -15,18 +15,11 @@ import hokmah.task.TaskList;
  * Initializes core components and manages the program lifecycle.
  */
 public class Hokmah {
-    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
+    public static final String DATETIME_INPUT_FORMAT = "yyyy-MM-dd HHmm";
+    public static final String DATETIME_OUTPUT_FORMAT = "MMM dd yyyy hh:mm a";
+
     public static final String DEFAULT_FILE_DATA_LOCATION = "data/tasks.txt";
-    public static final String LOGO = """
-            ,--.  ,--.         ,--.                         ,--.
-            |  '--'  |  ,---.  |  |,-.  ,--,--,--.  ,--,--. |  ,---.
-            |  .--.  | | .-. | |     /  |        | ' ,-.  | |  .-.  |
-            |  |  |  | ' '-' ' |  \\  \\  |  |  |  | \\ '-'  | |  | |  |
-            `--'  `--'  `---'  `--'`--' `--`--`--'  `--`--' `--' `--'
-            """;
-
-
-    public static final String[] EXIT_COMMANDS = {"bye", "exit", "quit", "cya"};
+    public static final String[] EXIT_COMMANDS = {"bye"};
 
     private static final Scanner scanner = new Scanner(System.in);
     protected TaskList tasks;
@@ -59,7 +52,6 @@ public class Hokmah {
         commandHandler = new CommandHandler(tasks, storage, ui);
         inputHandler = new InputHandler(commandHandler);
 
-        System.out.println(ui.getWelcomeMessage());
 
     }
 
@@ -101,4 +93,7 @@ public class Hokmah {
         new Hokmah(DEFAULT_FILE_DATA_LOCATION).run();
     }
 
+    public String[] getWelcomeMessage() {
+        return ui.getWelcomeMessage();
+    }
 }

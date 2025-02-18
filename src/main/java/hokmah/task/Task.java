@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
  * Defines common properties and behaviors for all task types.
  */
 public class Task {
-    public static final String DATE_STRING_OUTPUT_FORMAT = "MMM d yyyy hh:mm";
     private boolean isDone = false;
     private final String name;
 

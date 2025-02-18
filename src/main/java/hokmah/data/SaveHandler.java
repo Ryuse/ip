@@ -155,7 +155,7 @@ public class SaveHandler {
 
         try {
             LocalDateTime DeadlineEndTime = LocalDateTime.parse(taskInfo[3],
-                    DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+                    DateTimeFormatter.ofPattern(Hokmah.DATETIME_INPUT_FORMAT));
             task = new Deadline(taskName, DeadlineEndTime);
 
             if (taskInfo[1].equals("1")) {
@@ -180,9 +180,9 @@ public class SaveHandler {
 
         try {
             LocalDateTime EventStartTime = LocalDateTime.parse(taskInfo[3],
-                    DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+                    DateTimeFormatter.ofPattern(Hokmah.DATETIME_INPUT_FORMAT));
             LocalDateTime eventEndTime = LocalDateTime.parse(taskInfo[4],
-                    DateTimeFormatter.ofPattern(Hokmah.DATE_TIME_FORMAT));
+                    DateTimeFormatter.ofPattern(Hokmah.DATETIME_INPUT_FORMAT));
             task = new Event(taskName, EventStartTime, eventEndTime);
 
             if (taskInfo[1].equals("1")) {
