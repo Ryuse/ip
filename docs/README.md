@@ -33,6 +33,7 @@ Hokmah supports the following commands:
 - `unmark`: Mark a task as incomplete.
 - `help`: Show help window.
 - `bye`: Exit the application.
+
 ---
 ## Adding Tasks
 
@@ -262,4 +263,4 @@ I hope you don't come back soon!
 
 ---
 
-This guide provides a comprehensive overview of Hokmah's features and commands. 
+This guide provides an overview of Hokmah's features and commands. If you have any more questions feel free to contact me, Ryuse.
