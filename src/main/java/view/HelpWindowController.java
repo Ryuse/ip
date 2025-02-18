@@ -54,9 +54,9 @@ public class HelpWindowController extends AnchorPane {
                 {"event [name] /from ["
                         + DATETIME_INPUT_FORMAT + "] /to ["
                         + DATETIME_INPUT_FORMAT + "]", "Adds an event task to the task list"},
-                {"mark [task number]", "Marks the task at [task number] in the task list as completed"},
-                {"unmark [task number]", "Marks the task at [task number] in the task list as incomplete"},
-                {"delete [task number]", "Deletes the task at [task number] in the task list"},
+                {"mark [task index]", "Marks the task at [task index] in the task list as completed"},
+                {"unmark [task index]", "Marks the task at [task index] in the task list as incomplete"},
+                {"delete [task index]", "Deletes the task at [task index] in the task list"},
                 {"upcoming /on ["
                         + DATETIME_INPUT_FORMAT + "]", "Shows all the tasks that are happening on the given date"},
                 {"find [keyword]", "Finds tasks containing the specified keyword"},

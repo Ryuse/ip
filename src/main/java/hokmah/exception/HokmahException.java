@@ -18,6 +18,7 @@ public class HokmahException extends Exception {
         DEADLINE_NO_TIME_END,
         EVENT_NO_TIME_START,
         EVENT_NO_TIME_END,
+        EVENT_END_BEFORE_START,
         TASK_NOT_FOUND,
         NO_UPCOMING_ON_DATE,
         SEARCH_FAILED
@@ -52,21 +53,34 @@ public class HokmahException extends Exception {
             message = """
                     Ok so?
                     When is the deadline by?
-                    Try again but by adding /by\s""" + DATETIME_INPUT_FORMAT;
+                    Try again but by adding /by [{input_datetime_format}]
+                    The format is: deadline [name] /by [{input_datetime_format}]
+                    """;
 
         } else if (type == ExceptionType.EVENT_NO_TIME_START) {
             message = """
                     I don't know when your event will start and end?
-                    Can you try again but by adding /from\s"""
-                    + DATETIME_INPUT_FORMAT + " /to "
-                    + DATETIME_INPUT_FORMAT;
+                    Can you try again but by adding /from [{input_datetime_format}] /to [{input_datetime_format}]
+                    The format is: event [name] /from [{input_datetime_format}] /to [{input_datetime_format}]
+                    """;
+
+
 
         } else if (type == ExceptionType.EVENT_NO_TIME_END) {
             message = """
                     I don't know when your event will end?
-                    Can you try again but by adding /to\s"""
-                    + DATETIME_INPUT_FORMAT;
+                    Can you try again but by adding /to [{input_datetime_format}]
+                    The format is: event [name] /from [{input_datetime_format}] /to [{input_datetime_format}]
+                    """;
 
+
+        }
+        else if (type == ExceptionType.EVENT_END_BEFORE_START) {
+                message = """
+                    Wait, is your event start date seriously after the end date?
+                    Check your dates again!
+                    The format is: event [name] /from [{input_datetime_format}] /to  [{input_datetime_format}]
+                    """;
         } else if (type == ExceptionType.TASK_NOT_FOUND) {
             message = """
                     The task you are trying to perform an action on cannot be found.
@@ -75,12 +89,13 @@ public class HokmahException extends Exception {
         } else if (type == ExceptionType.NO_UPCOMING_ON_DATE) {
             message = """
                     I don't know when you want to see the upcoming tasks.
-                    Try again by adding /on\s""" + DATETIME_INPUT_FORMAT;
+                    Try again by adding /on [{input_datetime_format}]
+                    Format is: upcoming /on [{input_datetime_format}]""";
 
         } else if (type == ExceptionType.SEARCH_FAILED) {
             message = """
                     Can you specify a search term?
-                    Something like this: find [keyword]""";
+                    The format is: find [keyword]""";
 
         } else {
             message = """
@@ -89,6 +104,9 @@ public class HokmahException extends Exception {
                     """;
 
         }
+
+        message = message.replace("{input_datetime_format}", DATETIME_INPUT_FORMAT);
+
         throw new HokmahException(message);
 
     }

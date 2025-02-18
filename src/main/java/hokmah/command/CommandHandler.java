@@ -286,6 +286,12 @@ public class CommandHandler {
         }
 
 
+        if (!eventEndTimeDate.isAfter(eventStartTimeDate)) {
+            HokmahException hokmahException = new HokmahException(ExceptionType.EVENT_END_BEFORE_START);
+            return hokmahException.getMessageLines();
+        }
+
+
         Event newEvent = new Event(taskName, eventStartTimeDate, eventEndTimeDate);
         tasks.add(newEvent);
         storage.saveToFile(tasks.getTaskArrayList());

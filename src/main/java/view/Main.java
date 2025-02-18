@@ -29,11 +29,11 @@ public class Main extends Application {
 
             stage.setTitle("Hokmah");
             stage.getIcons().add(new Image("/images/icon.png"));
-            stage.setMinHeight(220);
-            stage.setMinWidth(700);
+            stage.setMinHeight(400);
+            stage.setMinWidth(900);
 
-            assert stage.getMinHeight() == 220;
-            assert stage.getMinWidth() == 700;
+            assert stage.getMinHeight() == 400;
+            assert stage.getMinWidth() == 900;
 
             fxmlLoader.<MainWindowController>getController().setHokmah(hokmah);
             fxmlLoader.<MainWindowController>getController().showWelcomeMessage();
