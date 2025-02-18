@@ -2,7 +2,7 @@
 
 Hokmah is a task management chatbot that supports four types of tasks: `todo`, `deadline`, `event`. It is designed for users who prefer typing commands to manage their tasks efficiently.
 
-![main.png](main.png)
+![main.png](Ui.png)
 
 (The mouse in the screenshot is intentional)
 
