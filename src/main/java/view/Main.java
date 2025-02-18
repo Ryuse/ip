@@ -36,7 +36,7 @@ public class Main extends Application {
             assert stage.getMinWidth() == 700;
 
             fxmlLoader.<MainWindowController>getController().setHokmah(hokmah);
-
+            fxmlLoader.<MainWindowController>getController().showWelcomeMessage();
             stage.show();
 
         } catch (IOException e) {

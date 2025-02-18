@@ -1,7 +1,7 @@
 package view;
 
 
-import static hokmah.Hokmah.DATE_TIME_FORMAT;
+import static hokmah.Hokmah.DATETIME_INPUT_FORMAT;
 
 import java.io.IOException;
 
@@ -50,14 +50,15 @@ public class HelpWindowController extends AnchorPane {
                 {"list", "Shows all the tasks in the list"},
                 {"todo [name]", "Adds a todo task to the task list"},
                 {"deadline [name] /by ["
-                        + DATE_TIME_FORMAT + "]", "Adds a deadline task to the task list"},
+                        + DATETIME_INPUT_FORMAT + "]", "Adds a deadline task to the task list"},
                 {"event [name] /from ["
-                        + DATE_TIME_FORMAT + "] /to ["
-                        + DATE_TIME_FORMAT + "]", "Adds an event task to the task list"},
+                        + DATETIME_INPUT_FORMAT + "] /to ["
+                        + DATETIME_INPUT_FORMAT + "]", "Adds an event task to the task list"},
                 {"mark [task number]", "Marks the task at [task number] in the task list as completed"},
                 {"unmark [task number]", "Marks the task at [task number] in the task list as incomplete"},
                 {"delete [task number]", "Deletes the task at [task number] in the task list"},
-                {"upcoming /on [" + DATE_TIME_FORMAT + "]", "Shows all the tasks that are happening on the given date"},
+                {"upcoming /on ["
+                        + DATETIME_INPUT_FORMAT + "]", "Shows all the tasks that are happening on the given date"},
                 {"find [keyword]", "Finds tasks containing the specified keyword"},
                 {"bye", "Only if you want to leave. It's not like I wanted you to be here."}
         };

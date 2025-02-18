@@ -28,8 +28,10 @@ public class MainWindowController extends AnchorPane {
     private Button sendButton;
 
     private Hokmah hokmah;
-    private HelpWindowController helpWindowController;
 
+    /**
+     * Initializes the scroll pane.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -40,10 +42,6 @@ public class MainWindowController extends AnchorPane {
      */
     public void setHokmah(Hokmah h) {
         this.hokmah = h;
-    }
-
-    public void setHelpWindowController(HelpWindowController h) {
-        this.helpWindowController = h;
     }
 
     /**
@@ -73,7 +71,7 @@ public class MainWindowController extends AnchorPane {
         }
 
         if (input.equals("help")) {
-            if (helpWindowController.isShown()) {
+            if (HelpWindowController.isShown()) {
                 dialogContainer.getChildren().add(
                         DialogBoxController.getHokmahDialog("""
                                 Wait... You already have the help window open!
@@ -82,7 +80,17 @@ public class MainWindowController extends AnchorPane {
                 return;
             }
 
-            helpWindowController.showHelpWindow();
+            HelpWindowController.showHelpWindow();
         }
+    }
+
+    /**
+     * Shows a welcome message when the application starts.
+     */
+    public void showWelcomeMessage() {
+        for (String response : hokmah.getWelcomeMessage()) {
+            dialogContainer.getChildren().add(DialogBoxController.getHokmahDialog(response));
+        }
+        ;
     }
 }
