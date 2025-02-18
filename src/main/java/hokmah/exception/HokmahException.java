@@ -65,7 +65,6 @@ public class HokmahException extends Exception {
                     """;
 
 
-
         } else if (type == ExceptionType.EVENT_NO_TIME_END) {
             message = """
                     I don't know when your event will end?
@@ -74,9 +73,8 @@ public class HokmahException extends Exception {
                     """;
 
 
-        }
-        else if (type == ExceptionType.EVENT_END_BEFORE_START) {
-                message = """
+        } else if (type == ExceptionType.EVENT_END_BEFORE_START) {
+            message = """
                     Wait, is your event start date seriously after the end date?
                     Check your dates again!
                     The format is: event [name] /from [{input_datetime_format}] /to  [{input_datetime_format}]
