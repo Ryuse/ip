@@ -35,9 +35,9 @@ public class InputHandler {
         assert !input.isBlank() : "Empty input received";
         assert commandHandler != null : "Missing command handler";
 
-        String[] inputArray = input.split(" ", 2);
-        String command = inputArray[0];
-
+        String[] inputArray = input.trim().split(" ", 2);
+        String command = inputArray[0].trim();
+        
         boolean isExitCommand = Arrays.asList(EXIT_COMMANDS).contains(command);
         if (isExitCommand) {
             return commandHandler.exit();
