@@ -15,7 +15,7 @@ public class HokmahException extends Exception {
         NO_SAVE_FILE,
         NO_NAME,
         NO_INDEX,
-        DEADLINE_NO_TIME_END,
+        INVALID_DEADLINE_FORMAT,
         EVENT_NO_TIME_START,
         EVENT_NO_TIME_END,
         EVENT_END_BEFORE_START,
@@ -49,26 +49,22 @@ public class HokmahException extends Exception {
             message = """
                     Can you at least give me a proper index for the command?
                     """;
-        } else if (type == ExceptionType.DEADLINE_NO_TIME_END) {
+        } else if (type == ExceptionType.INVALID_DEADLINE_FORMAT) {
             message = """
-                    Ok so?
-                    When is the deadline by?
-                    Try again but by adding /by [{input_datetime_format}]
+                    Ok? Can you put the deadline command properly?
                     The format is: deadline [name] /by [{input_datetime_format}]
                     """;
 
         } else if (type == ExceptionType.EVENT_NO_TIME_START) {
             message = """
-                    I don't know when your event will start and end?
-                    Can you try again but by adding /from [{input_datetime_format}] /to [{input_datetime_format}]
+                    Can you put when your event will start and end properly?
                     The format is: event [name] /from [{input_datetime_format}] /to [{input_datetime_format}]
                     """;
 
 
         } else if (type == ExceptionType.EVENT_NO_TIME_END) {
             message = """
-                    I don't know when your event will end?
-                    Can you try again but by adding /to [{input_datetime_format}]
+                    Can you put when your event will end properly?
                     The format is: event [name] /from [{input_datetime_format}] /to [{input_datetime_format}]
                     """;
 
@@ -77,7 +73,7 @@ public class HokmahException extends Exception {
             message = """
                     Wait, is your event start date seriously after the end date?
                     Check your dates again!
-                    The format is: event [name] /from [{input_datetime_format}] /to  [{input_datetime_format}]
+                    The format is: event [name] /from [{input_datetime_format}] /to [{input_datetime_format}]
                     """;
         } else if (type == ExceptionType.TASK_NOT_FOUND) {
             message = """
@@ -86,12 +82,12 @@ public class HokmahException extends Exception {
 
         } else if (type == ExceptionType.NO_UPCOMING_ON_DATE) {
             message = """
-                    I don't know when you want to see the upcoming tasks!
+                    Can you put when want to see the upcoming tasks properly?
                     Format is: upcomingOn [{input_datetime_format}]""";
 
         } else if (type == ExceptionType.SEARCH_FAILED) {
             message = """
-                    Can you specify a search term?
+                    Can you specify a search term? You're bad at following commands.
                     The format is: find [keyword]""";
 
         } else {
