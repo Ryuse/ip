@@ -59,7 +59,7 @@ public class HelpWindowController extends AnchorPane {
                 {"mark [task index]", "Marks the task at [task index] in the task list as completed"},
                 {"unmark [task index]", "Marks the task at [task index] in the task list as incomplete"},
                 {"delete [task index]", "Deletes the task at [task index] in the task list"},
-                {"upcoming /on ["
+                {"upcomingOn ["
                         + DATETIME_INPUT_FORMAT + "]", "Shows all the tasks that are happening on the given date"},
                 {"find [keyword]", "Finds tasks containing the specified keyword"},
                 {"bye", "Only if you want to leave. It's not like I wanted you to be here."}

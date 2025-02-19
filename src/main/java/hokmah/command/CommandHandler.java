@@ -360,13 +360,7 @@ public class CommandHandler {
             return hokmahException.getMessageLines();
         }
 
-        String[] taskDetails = inputArray[1].split(" /on ");
-        if (taskDetails.length < 2) {
-            HokmahException hokmahException = new HokmahException(ExceptionType.NO_UPCOMING_ON_DATE);
-            return hokmahException.getMessageLines();
-        }
-
-        String date = taskDetails[1].trim();
+        String date = inputArray[1].trim();
         LocalDateTime dateToCheck;
 
         try {

@@ -62,7 +62,7 @@ public class InputHandler {
             return commandHandler.addEvent(inputArray);
         case "help":
             return commandHandler.help();
-        case "upcoming":
+        case "upcomingOn":
             return commandHandler.upcomingTasksOn(inputArray);
         default:
             return commandHandler.unsupportedCommand();

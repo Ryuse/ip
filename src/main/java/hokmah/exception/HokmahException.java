@@ -86,9 +86,8 @@ public class HokmahException extends Exception {
 
         } else if (type == ExceptionType.NO_UPCOMING_ON_DATE) {
             message = """
-                    I don't know when you want to see the upcoming tasks.
-                    Try again by adding /on [{input_datetime_format}]
-                    Format is: upcoming /on [{input_datetime_format}]""";
+                    I don't know when you want to see the upcoming tasks!
+                    Format is: upcomingOn [{input_datetime_format}]""";
 
         } else if (type == ExceptionType.SEARCH_FAILED) {
             message = """

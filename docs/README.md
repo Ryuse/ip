@@ -27,7 +27,7 @@ Hokmah supports the following commands:
 - `event`: Add an event task.
 - `list`: List all tasks.
 - `find`: Find tasks by keyword.
-- `upcoming`: Find tasks by end time.
+- `upcomingOn`: Find tasks by end time.
 - `delete`: Delete a task.
 - `mark`: Mark a task as complete.
 - `unmark`: Mark a task as incomplete.
@@ -150,14 +150,14 @@ View upcoming tasks that occur on a specific date.
 
 **Command format**:
 ```text
-upcoming /on <dateTime>
+upcomingOn <dateTime>
 ```
 
 - `dateTime` must be in `yyyy-MM-dd HHmm` format.
 
 **Example**:
 ```text
-upcoming /on 2019-12-02 1800
+upcomingOn 2019-12-02 1800
 ```
 
 **Response**:
