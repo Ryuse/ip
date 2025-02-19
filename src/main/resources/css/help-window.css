@@ -1,11 +1,15 @@
 /* General window styling */
 .root {
-    -fx-background-color: #f5f5f5;
     -fx-padding: 10px;
+    main-color: rgb(243, 243, 243);       /* Create a looked-up color called "main-color" within root. */
+    -fx-background-color: main-color;
+    -fx-background-image: url("../images/mainBg.png");
+    -fx-opacity: 0.75;
 }
 
 
 .grid-pane {
+    -fx-background-color: white;
     -fx-border-color: black;
     -fx-border-width: 1px;
     -fx-padding: 5px;

@@ -50,7 +50,7 @@ public class MainWindowController extends AnchorPane {
      */
     @FXML
     private void handleUserInput() throws InterruptedException {
-        String input = userInput.getText();
+        String input = userInput.getText().trim();
         String[] responses = hokmah.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBoxController.getUserDialog(input)

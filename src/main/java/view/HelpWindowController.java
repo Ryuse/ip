@@ -5,6 +5,7 @@ import static hokmah.Hokmah.DATETIME_INPUT_FORMAT;
 
 import java.io.IOException;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 
 /**
@@ -107,6 +109,14 @@ public class HelpWindowController extends AnchorPane {
             helpStage.setScene(new Scene(helpWindow));
 
             isShown = true;
+
+            helpStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent windowEvent) {
+                    isShown = false;
+                }
+            });
+
             helpStage.show();
 
         } catch (IOException e) {

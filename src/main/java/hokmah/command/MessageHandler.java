@@ -133,7 +133,7 @@ public class MessageHandler {
     public String[] getHelpMessage() {
         String message = """
                 You seriously need help? Fine.
-                I'll show you what I can do.""";
+                I'll show you what I can do..""";
 
         String[] messageLines = message.split("\n");
 
