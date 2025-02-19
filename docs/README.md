@@ -14,7 +14,7 @@ Hokmah is a task management chatbot that supports four types of tasks: `todo`, `
 2. **Run the Application**:
     - Double-click the downloaded JAR file, or open a terminal and navigate to the directory where the JAR file is located. Then, run the following command:
       ```bash
-      java -jar Hokmah-v0.2.jar
+      java -jar hokmah-v0.2.jar
       ```
 
 ## Features Overview
