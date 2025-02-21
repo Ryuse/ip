@@ -76,6 +76,7 @@ public class CommandHandler {
         assert task != null : "Task is null";
         task.markDone();
 
+        storage.saveToFile(tasks.getTaskArrayList());
         return messageHandler.getMarkTaskMessage(task);
     }
 
@@ -90,6 +91,7 @@ public class CommandHandler {
         assert task != null : "Task is null";
         task.unmarkDone();
 
+        storage.saveToFile(tasks.getTaskArrayList());
         return messageHandler.getUnmarkTaskMessage(task);
     }
 
@@ -125,7 +127,8 @@ public class CommandHandler {
         validateTaskName(taskName);
         ToDo newTodo = new ToDo(taskName);
 
-        saveTask(newTodo);
+        tasks.add(newTodo);
+        storage.saveToFile(tasks.getTaskArrayList());
 
         return messageHandler.getAddTaskMessage(newTodo, tasks.size());
     }
@@ -154,7 +157,8 @@ public class CommandHandler {
         LocalDateTime deadlineDate = parseDateTime(deadline, ExceptionType.INVALID_DEADLINE_FORMAT);
         Deadline newDeadline = new Deadline(taskName, deadlineDate);
 
-        saveTask(newDeadline);
+        tasks.add(newDeadline);
+        storage.saveToFile(tasks.getTaskArrayList());
 
         return messageHandler.getAddTaskMessage(newDeadline, tasks.size());
     }
@@ -192,9 +196,10 @@ public class CommandHandler {
             return hokmahException.getMessageLines();
         }
 
-
         Event newEvent = new Event(taskName, eventStartTimeDate, eventEndTimeDate);
-        saveTask(newEvent);
+
+        tasks.add(newEvent);
+        storage.saveToFile(tasks.getTaskArrayList());
 
         return messageHandler.getAddTaskMessage(newEvent, tasks.size());
     }
